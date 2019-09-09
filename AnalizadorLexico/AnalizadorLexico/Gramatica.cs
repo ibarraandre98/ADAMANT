@@ -39,7 +39,7 @@ namespace AnalizadorLexico
             var reservadaevento = ToTerm("evento");
             var reservadaexplicito = ToTerm("explicito");
             var reservadaexterno = ToTerm("externo");
-            var reservadafalso = ToTerm("falso","tipodedato");
+            var reservadafalso = ToTerm("falso", "tipodedato");
             var reservadafinalmente = ToTerm("finalmente");
             var reservadaarreglado = ToTerm("arreglado");
             var reservadapara = ToTerm("para");
@@ -72,7 +72,7 @@ namespace AnalizadorLexico
             var reservadainterruptor = ToTerm("interruptor");
             var reservadaeste = ToTerm("este");
             var reservadatirar = ToTerm("tirar");
-            var reservadaverdadero = ToTerm("verdadero","tipodedato");
+            var reservadaverdadero = ToTerm("verdadero", "tipodedato");
             var reservadaintentar = ToTerm("intentar");
             var reservadatipo_de = ToTerm("tipo_de");
             var reservadanombre_espacio = ToTerm("nombre_espacio");
@@ -82,7 +82,7 @@ namespace AnalizadorLexico
             var reservadavacio = ToTerm("vacio");
             var reservadamientras = ToTerm("mientras");
             var reservadaflotante = ToTerm("flotante", "tipodedato");
-            var reservadaentero = ToTerm("entero","tipodedato");
+            var reservadaentero = ToTerm("entero", "tipodedato");
             var reservadalargo = ToTerm("largo", "tipodedato");
             var reservadaobjeto = ToTerm("objeto");
             var reservadaobtener = ToTerm("obtener");
@@ -106,7 +106,7 @@ namespace AnalizadorLexico
             var reservadausando = ToTerm("usando");
             var reservadabooleano = ToTerm("booleano", "tipodedato");
             var reservadabyte = ToTerm("byte");
-            var reservadacaracter = ToTerm("caracter","tipodedato");
+            var reservadacaracter = ToTerm("caracter", "tipodedato");
             var reservadadecimal = ToTerm("decimal");
             var reservadadoble = ToTerm("doble", "tipodedato");
             var reservadadinamico = ToTerm("dinamico");
@@ -138,6 +138,10 @@ namespace AnalizadorLexico
             var reservadaincremento = ToTerm("++");
             var reservadadecremento = ToTerm("--");
             var reservadasistema = ToTerm("sistema");
+            var reservadadospuntos = ToTerm(":");
+            var reservadapordefecto = ToTerm("pordefecto");
+
+
             #endregion
             #region No Terminales
             NonTerminal usando = new NonTerminal("Usando");
@@ -160,10 +164,14 @@ namespace AnalizadorLexico
             NonTerminal hacer = new NonTerminal("hacer");
             NonTerminal asignaciones = new NonTerminal("asignaciones");
             NonTerminal cualquierdato = new NonTerminal("cualquierdato");
+            NonTerminal interruptor = new NonTerminal("interruptor");
+            NonTerminal caso = new NonTerminal("caso");
+            NonTerminal pordefecto = new NonTerminal("caso");
+
             //NonTerminal palabrasreservadas = new NonTerminal("palabrasreservadas");
             NonTerminal raiz = new NonTerminal("raiz");
             NonTerminal E = new NonTerminal("E");
-            
+
             //NonTerminal 
             #endregion
 
@@ -188,6 +196,7 @@ namespace AnalizadorLexico
                 | reservadausando + librerias + reservadapuntocoma + spacename
                 | usando + reservadausando + librerias + reservadapuntocoma + spacename;
 
+
             librerias.Rule = reservadasistema;
 
             spacename.Rule = reservadaspacename + librerias + reservadallaveabrir + clase + reservadallavecerrar |
@@ -204,10 +213,14 @@ namespace AnalizadorLexico
                 | dentrovoid + condicional + dentrovoid
                 | dentrovoid + para + dentrovoid
                 | dentrovoid + mientras + dentrovoid
+                | dentrovoid + hacer + dentrovoid
+                | dentrovoid + interruptor + dentrovoid
                 | declaracion
                 | condicional
                 | para
                 | mientras
+                | hacer
+                | interruptor
                 | Empty;
 
             declaracion.Rule = reservadaentero + id + reservadaigual + numero + reservadapuntocoma
@@ -250,14 +263,42 @@ namespace AnalizadorLexico
             mientras.Rule = reservadamientras + reservadaparentesisabrir + numvar + operadores + numvar + reservadaparentesiscerrar + reservadallaveabrir + Empty + reservadallavecerrar
                 | reservadamientras + reservadaparentesisabrir + numvar + operadores + numvar + reservadaparentesiscerrar + reservadallaveabrir + dentrovoid + reservadallavecerrar;
 
-            hacer.Rule = reservadahacer + reservadallaveabrir + dentrovoid + reservadallavecerrar + reservadamientras ;
+            hacer.Rule = reservadahacer + reservadallaveabrir + Empty + reservadallavecerrar + reservadamientras + reservadaparentesisabrir + numvar + operadores + numvar + reservadaparentesiscerrar
+                | reservadahacer + reservadallaveabrir + dentrovoid + reservadallavecerrar + reservadamientras + reservadaparentesisabrir + numvar + operadores + numvar + reservadaparentesiscerrar;
+
+            interruptor.Rule = reservadainterruptor + reservadaparentesisabrir + numvar + reservadaparentesiscerrar + reservadallaveabrir + Empty + reservadallavecerrar
+                | reservadainterruptor + reservadaparentesisabrir + numvar + reservadaparentesiscerrar + reservadallaveabrir + caso + reservadallavecerrar
+                | reservadainterruptor + reservadaparentesisabrir + numvar + reservadaparentesiscerrar + reservadallaveabrir + pordefecto + reservadallavecerrar
+                | reservadainterruptor + reservadaparentesisabrir + numvar + reservadaparentesiscerrar + reservadallaveabrir + caso + pordefecto + reservadallavecerrar
+                | reservadainterruptor + reservadaparentesisabrir + numvar + reservadaparentesiscerrar + reservadallaveabrir + pordefecto + caso + reservadallavecerrar
+                | reservadainterruptor + reservadaparentesisabrir + numvar + reservadaparentesiscerrar + reservadallaveabrir + caso + pordefecto + caso + reservadallavecerrar;
+
+            pordefecto.Rule = reservadapordefecto + numero + reservadadospuntos + Empty + reservadaromper
+                | reservadapordefecto + numerodecimal + reservadadospuntos + Empty + reservadaromper
+                | reservadapordefecto + cualquier + reservadadospuntos + Empty + reservadaromper
+
+                | reservadapordefecto + numero + reservadadospuntos + dentrovoid + reservadaromper
+                | reservadapordefecto + numerodecimal + reservadadospuntos + dentrovoid + reservadaromper
+                | reservadapordefecto + cualquier + reservadadospuntos + dentrovoid + reservadaromper;
+
+            caso.Rule = reservadacaso + numero + reservadadospuntos + Empty + reservadaromper
+                | reservadacaso + numerodecimal + reservadadospuntos + Empty + reservadaromper
+                | reservadacaso + cualquier + reservadadospuntos + Empty + reservadaromper
+
+                | reservadacaso + numero + reservadadospuntos + dentrovoid + reservadaromper
+                | reservadacaso + numerodecimal + reservadadospuntos + dentrovoid + reservadaromper
+                | reservadacaso + cualquier + reservadadospuntos + dentrovoid + reservadaromper
 
 
+                |reservadacaso + numero + reservadadospuntos + Empty + reservadaromper + caso
+                | reservadacaso + numerodecimal + reservadadospuntos + Empty + reservadaromper + caso
+                | reservadacaso + cualquier + reservadadospuntos + Empty + reservadaromper + caso
 
+                | reservadacaso + numero + reservadadospuntos + dentrovoid + reservadaromper + caso
+                | reservadacaso + numerodecimal + reservadadospuntos + dentrovoid + reservadaromper + caso
+                | reservadacaso + cualquier + reservadadospuntos + dentrovoid + reservadaromper + caso;
 
-            asignaciones.Rule = id + reservadaigual + numero + reservadapuntocoma;
-
-
+        asignaciones.Rule = id + reservadaigual + numero + reservadapuntocoma;
 
             acceso.Rule = Empty
                 | reservadapublico
@@ -302,13 +343,15 @@ namespace AnalizadorLexico
                 | cualquiercar
                 | cualquier;
 
+
+
             /*palabrasreservadas.ErrorRule = reservadaabstracto
                 | reservadacomo
                 | reservadaasincrono
                 | reservadaespera
                 | reservadachecado
                 | reservadaconst;*/
-                
+
 
             //de reservadamayorigualqueclaracion.Rule = declaracion + reservadaentero + id + reservadapuntocoma
             //    | reservadaentero + id + reservadapuntocoma
