@@ -298,7 +298,7 @@ namespace AnalizadorLexico
                 | reservadacaso + numerodecimal + reservadadospuntos + dentrovoid + reservadaromper + caso
                 | reservadacaso + cualquier + reservadadospuntos + dentrovoid + reservadaromper + caso;
 
-        asignaciones.Rule = id + reservadaigual + numero + reservadapuntocoma;
+            asignaciones.Rule = id + reservadaigual + numero + reservadapuntocoma;
 
             acceso.Rule = Empty
                 | reservadapublico

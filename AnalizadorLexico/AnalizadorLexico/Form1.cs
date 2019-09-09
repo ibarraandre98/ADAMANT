@@ -32,13 +32,15 @@ namespace AnalizadorLexico
         {
             CARACTER = 0; //SE INICIALIZA A 0 EN CADA REPINTADO
             int ALTURA = textoCodigo.GetPositionFromCharIndex(0).Y - 1;//coordenada del primer caracter
+            Color Verde = Color.FromArgb(141, 240, 1);
+            SolidBrush myBrush = new SolidBrush(Verde);
 
 
             if (textoCodigo.Lines.Length > 0)//si hay alguna linea las recorrera todas y escribira numero
             {
                 for (int i = 0; i < textoCodigo.Lines.Length; i++)
                 {
-                    e.Graphics.DrawString(Convert.ToString(i + 1), textoCodigo.Font, Brushes.Firebrick, pictureBox1.Width - (e.Graphics.MeasureString(Convert.ToString(i + 1), textoCodigo.Font).Width + 10), ALTURA);
+                    e.Graphics.DrawString(Convert.ToString(i + 1), textoCodigo.Font, myBrush, pictureBox1.Width - (e.Graphics.MeasureString(Convert.ToString(i + 1), textoCodigo.Font).Width + 10), ALTURA);
                     CARACTER = CARACTER + textoCodigo.Lines[i].Length + 1;
                     //MessageBox.Show(Convert.ToString(textoCodigo.Lines.Length));
                     ALTURA = textoCodigo.GetPositionFromCharIndex(CARACTER).Y;
@@ -46,7 +48,7 @@ namespace AnalizadorLexico
             }
             else
             {
-                e.Graphics.DrawString("1", textoCodigo.Font, Brushes.Firebrick, pictureBox1.Width - (e.Graphics.MeasureString("1", textoCodigo.Font).Width + 10), ALTURA);
+                e.Graphics.DrawString("1", textoCodigo.Font, myBrush, pictureBox1.Width - (e.Graphics.MeasureString("1", textoCodigo.Font).Width + 10), ALTURA);
             }
         }
 
@@ -178,14 +180,7 @@ namespace AnalizadorLexico
             pictureBox1.Refresh();
         }
 
-        private void btnNuevo_MouseLeave(object sender, EventArgs e)
-        {
-            btnNuevo.BackColor = Color.FromArgb(26, 32, 40);
-        }
-        private void btnNuevo_MouseEnter(object sender, EventArgs e)
-        {
-            btnNuevo.BackColor = Color.White;
-        }
+       
 
         private void btnmini_Click(object sender, EventArgs e)
         {
@@ -195,15 +190,15 @@ namespace AnalizadorLexico
         private void btnmaxi_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            btnres.Visible = true;
-            btnmaxi.Visible = false;
+            btnMax.Visible = false;
+            btnRest.Visible = true;
         }
 
         private void btnres_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
-            btnmaxi.Visible = true;
-            btnres.Visible = false;
+            btnRest.Visible = false;
+            btnMax.Visible = true;
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -511,85 +506,9 @@ namespace AnalizadorLexico
             }
         }
 
-        private void btnAbrir_MouseEnter(object sender, EventArgs e)
-        {
-            btnAbrir.BackColor = Color.White;
-        }
+        
 
-        private void btnAbrir_MouseLeave(object sender, EventArgs e)
-        {
-            btnAbrir.BackColor = Color.FromArgb(26, 32, 40);
-        }
-
-        private void btnGuardar_MouseEnter(object sender, EventArgs e)
-        {
-            btnGuardar.BackColor = Color.White;
-        }
-
-        private void btnGuardar_MouseLeave(object sender, EventArgs e)
-        {
-            btnGuardar.BackColor = Color.FromArgb(26, 32, 40);
-        }
-
-        private void btnCopiar_MouseEnter(object sender, EventArgs e)
-        {
-            btnCopiar.BackColor = Color.White;
-        }
-
-        private void btnCopiar_MouseLeave(object sender, EventArgs e)
-        {
-            btnCopiar.BackColor = Color.FromArgb(26, 32, 40);
-        }
-
-        private void btnCortar_MouseEnter(object sender, EventArgs e)
-        {
-            btnCortar.BackColor = Color.White;
-        }
-
-        private void btnCortar_MouseLeave(object sender, EventArgs e)
-        {
-            btnCortar.BackColor = Color.FromArgb(26, 32, 40);
-        }
-
-        private void btnPegar_MouseEnter(object sender, EventArgs e)
-        {
-            btnPegar.BackColor = Color.White;
-        }
-
-        private void btnPegar_MouseLeave(object sender, EventArgs e)
-        {
-            btnPegar.BackColor = Color.FromArgb(26, 32, 40);
-        }
-
-        private void btnBorrarTodo_MouseEnter(object sender, EventArgs e)
-        {
-            btnBorrarTodo.BackColor = Color.White;
-        }
-
-        private void btnBorrarTodo_MouseLeave(object sender, EventArgs e)
-        {
-            btnBorrarTodo.BackColor = Color.FromArgb(26, 32, 40);
-        }
-
-        private void btnCompilar_MouseEnter(object sender, EventArgs e)
-        {
-            btnCompilar.BackColor = Color.White;
-        }
-
-        private void btnCompilar_MouseLeave(object sender, EventArgs e)
-        {
-            btnCompilar.BackColor = Color.FromArgb(26, 32, 40);
-        }
-
-        private void btnInfo_MouseEnter(object sender, EventArgs e)
-        {
-            btnInfo.BackColor = Color.White;
-        }
-
-        private void btnInfo_MouseLeave(object sender, EventArgs e)
-        {
-            btnInfo.BackColor = Color.FromArgb(26, 32, 40);
-        }
+        
 
         private void btnInfo_Click(object sender, EventArgs e)
         {
@@ -609,6 +528,21 @@ namespace AnalizadorLexico
                 Left = Left + (e.X - posX);
                 Top = Top + (e.Y - posY);
             }
+        }
+
+        private void Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void OFD_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void SFD_FileOk(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }
