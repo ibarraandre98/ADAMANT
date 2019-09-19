@@ -120,7 +120,7 @@
             this.sintactico.Location = new System.Drawing.Point(4, 22);
             this.sintactico.Name = "sintactico";
             this.sintactico.Padding = new System.Windows.Forms.Padding(3);
-            this.sintactico.Size = new System.Drawing.Size(394, 505);
+            this.sintactico.Size = new System.Drawing.Size(345, 575);
             this.sintactico.TabIndex = 0;
             this.sintactico.Text = "Sintáctico";
             this.sintactico.UseVisualStyleBackColor = true;
@@ -189,7 +189,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
             this.dtgToken.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dtgToken.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgToken.Size = new System.Drawing.Size(388, 499);
+            this.dtgToken.Size = new System.Drawing.Size(339, 569);
             this.dtgToken.TabIndex = 0;
             // 
             // Token
