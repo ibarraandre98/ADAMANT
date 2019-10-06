@@ -283,8 +283,8 @@ namespace AnalizadorLexico
 
         private void btnCompilar_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 if (textoCodigo.TextLength == 0)
                     MessageBox.Show("No se puede compilar esta vacío");
                 else
@@ -605,12 +605,16 @@ namespace AnalizadorLexico
 
                 ts.Clear();
                 LlenadoTablaSimbolos();
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
         }
+            catch(NullReferenceException ex)
+            {
+                MessageBox.Show("Error de compilación");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+}
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
