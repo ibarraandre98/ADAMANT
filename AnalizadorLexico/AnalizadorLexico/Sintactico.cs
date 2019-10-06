@@ -35,5 +35,14 @@ namespace AnalizadorLexico
             return arbol;
         }
 
+        public static ParseTreeNode operaciones(String cadena)
+        {
+            GramaticaOperaciones gramatica = new GramaticaOperaciones();
+            LanguageData lenguaje = new LanguageData(gramatica);
+            Parser parser = new Parser(lenguaje);
+            ParseTree arbol = parser.Parse(cadena);
+            return arbol.Root;
+        }
+
     }
 }

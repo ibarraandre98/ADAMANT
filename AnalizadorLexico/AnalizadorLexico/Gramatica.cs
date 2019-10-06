@@ -140,7 +140,15 @@ namespace AnalizadorLexico
             var reservadasistema = ToTerm("sistema");
             var reservadadospuntos = ToTerm(":");
             var reservadapordefecto = ToTerm("pordefecto");
-
+            var reservadaimprimir = ToTerm("imprimir");
+            var reservadamas = ToTerm("+");
+            var reservadamenos = ToTerm("-");
+            var reservadapor = ToTerm("*");
+            var reservadaentre = ToTerm("/");
+            var reservadapotencia = ToTerm("^");
+            var reservadaraiz = ToTerm("√");
+            var reservadaasignacion = ToTerm("->");
+            var reservadaas = ToTerm("asign");
 
             #endregion
             #region No Terminales
@@ -167,6 +175,10 @@ namespace AnalizadorLexico
             NonTerminal interruptor = new NonTerminal("interruptor");
             NonTerminal caso = new NonTerminal("caso");
             NonTerminal pordefecto = new NonTerminal("caso");
+            NonTerminal impresion = new NonTerminal("impresion");
+            NonTerminal operacion = new NonTerminal("operacion");
+            NonTerminal asignacion = new NonTerminal("asignacion");
+            
 
             //NonTerminal palabrasreservadas = new NonTerminal("palabrasreservadas");
             NonTerminal raiz = new NonTerminal("raiz");
@@ -209,21 +221,27 @@ namespace AnalizadorLexico
                 | acceso + reservadaestatico + reservadavacio + reservadaprincipal + reservadaparentesisabrir + reservadacadena + reservadacorcheteabrir + reservadacorchetecerrar + reservadaargumento + reservadaparentesiscerrar + reservadallaveabrir + dentrovoid + reservadallavecerrar
                 | acceso + reservadaestatico + reservadavacio + reservadaprincipal + reservadaparentesisabrir + reservadacadena + reservadacorcheteabrir + reservadacorchetecerrar + reservadaargumento + reservadaparentesiscerrar + reservadallaveabrir + Empty + reservadallavecerrar;
 
-            dentrovoid.Rule = dentrovoid + declaracion + dentrovoid
+            dentrovoid.Rule =
+                  dentrovoid + asignacion + dentrovoid
+                | dentrovoid + declaracion + dentrovoid 
                 | dentrovoid + condicional + dentrovoid
                 | dentrovoid + para + dentrovoid
                 | dentrovoid + mientras + dentrovoid
                 | dentrovoid + hacer + dentrovoid
                 | dentrovoid + interruptor + dentrovoid
+                | dentrovoid + impresion +dentrovoid
+                | asignacion
                 | declaracion
                 | condicional
                 | para
                 | mientras
                 | hacer
                 | interruptor
+                | impresion
                 | Empty;
 
             declaracion.Rule = reservadaentero + id + reservadaigual + numero + reservadapuntocoma
+                | reservadaentero + id + reservadaigual + operacion + reservadapuntocoma
                 | reservadalargo + id + reservadaigual + numero + reservadapuntocoma
                 | reservadaflotante + id + reservadaigual + numerodecimal + reservadapuntocoma
                 | reservadadoble + id + reservadaigual + numerodecimal + reservadapuntocoma
@@ -246,8 +264,7 @@ namespace AnalizadorLexico
                 | reservadabooleano + id + reservadapuntocoma
                 | reservadacadena + id + reservadapuntocoma
                 | reservadacaracter + id + reservadapuntocoma
-                | reservadavariable + id + reservadapuntocoma
-                ;
+                | reservadavariable + id + reservadapuntocoma;
 
             condicional.Rule = reservadasi + reservadaparentesisabrir + id + operadores + numero + reservadaparentesiscerrar + reservadallaveabrir + Empty + reservadallavecerrar
                 | reservadasi + reservadaparentesisabrir + id + operadores + numero + reservadaparentesiscerrar + reservadallaveabrir + dentrovoid + reservadallavecerrar
@@ -298,7 +315,22 @@ namespace AnalizadorLexico
                 | reservadacaso + numerodecimal + reservadadospuntos + dentrovoid + reservadaromper + caso
                 | reservadacaso + cualquier + reservadadospuntos + dentrovoid + reservadaromper + caso;
 
-            asignaciones.Rule = id + reservadaigual + numero + reservadapuntocoma;
+            operacion.Rule = operacion + reservadamas + operacion
+                | operacion + reservadamenos + operacion
+                | operacion + reservadapor + operacion
+                | operacion + reservadaentre + operacion
+                | id
+                | numero
+                | reservadaparentesisabrir + operacion + reservadaparentesiscerrar
+                | operacion + reservadaraiz + operacion
+                | operacion + reservadapotencia + operacion;
+
+
+            impresion.Rule = reservadaimprimir + reservadaparentesisabrir + operacion + reservadaparentesiscerrar + reservadapuntocoma;
+
+            asignacion.Rule = reservadaas + id + reservadaigual + operacion + reservadapuntocoma
+                | reservadaas + id + reservadaigual + numero + reservadapuntocoma;
+
 
             acceso.Rule = Empty
                 | reservadapublico

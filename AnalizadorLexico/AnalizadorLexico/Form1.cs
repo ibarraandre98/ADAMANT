@@ -283,8 +283,8 @@ namespace AnalizadorLexico
 
         private void btnCompilar_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 if (textoCodigo.TextLength == 0)
                     MessageBox.Show("No se puede compilar esta vacío");
                 else
@@ -325,13 +325,20 @@ namespace AnalizadorLexico
                     //+ " *Span : Location" + item.Span.Location
                     //+ " *Term: " + item.Term.ToString()
                     //+ " *TermErrorAlias: " + item.Term.ErrorAlias
-                    //+ " *itemtermName: " + item.Term.Name);
+                    //+ " *item.Term.Name: " + item.Term.Name);
                         //
                         #region Agregado de variables declaradas
                         foreach (var item1 in nodos)
                         {
 
-                            if ((item1.Term.Name.Equals("tipodedato") || item1.Term.Name.Equals("id") || item1.Term.Name.Equals("numero") || item1.Term.Name.Equals("numero-decimal") || item1.Term.Name.Equals("cualquier") || item1.Term.Name.Equals("cualquiercar")) && (item1.Span.EndPosition <= mayor && (item1.Span.EndPosition - item1.Span.Length) >= menor))
+                            if ((item1.Term.Name.Equals("tipodedato") 
+                                || item1.Term.Name.Equals("id") 
+                                || item1.Term.Name.Equals("numero") 
+                                || item1.Term.Name.Equals("numero-decimal") 
+                                || item1.Term.Name.Equals("cualquier") 
+                                || item1.Term.Name.Equals("cualquiercar")) 
+                                && (item1.Span.EndPosition <= mayor 
+                                && (item1.Span.EndPosition - item1.Span.Length) >= menor))
                             {
                                 if (item1.Term.Name.Equals("tipodedato"))
                                 {
@@ -343,10 +350,22 @@ namespace AnalizadorLexico
                                     variable = item1.ToString().Split(' ').ElementAt(0);
                                     //MessageBox.Show(variable);
                                 }
-                                if (item1.Term.Name.Equals("numero") || item1.Term.Name.Equals("numero-decimal")|| item1.Term.Name.Equals("cualquier") || item1.Term.Name.Equals("cualquiercar") || item1.Term.Name.Equals("tipodedato"))
+                                if (item1.Term.Name.Equals("numero") 
+                                    || item1.Term.Name.Equals("numero-decimal")
+                                    || item1.Term.Name.Equals("cualquier") 
+                                    || item1.Term.Name.Equals("cualquiercar") 
+                                    || item1.Term.Name.Equals("tipodedato"))
                                 {
-                                    valor = item1.ToString().Split(' ').ElementAt(0);
-                                    //MessageBox.Show(item1.ToString());
+                                    if (item1.Term.Name.Equals("tipodedato"))
+                                    {
+                                        valor = null;
+                                        //MessageBox.Show(item1.ToString() + "muski");
+                                    }
+                                    else
+                                    {
+                                        valor = item1.ToString().Split(' ').ElementAt(0);
+                                        //MessageBox.Show(item1.ToString() + "muski");
+                                    }
                                 }
                             //    MessageBox.Show("#" + con.ToString()
                             //+ " *ITEM: " + item1.ToString()
@@ -363,9 +382,9 @@ namespace AnalizadorLexico
                         //
                         #region Detecta si ya hay una variable declarada
                         Boolean declarada = false;
-                        foreach (var item1 in ts)
+                        foreach (var itemTablaSimbolos in ts)
                         {
-                            if (variable.Equals(item1.variable) && item1.tipo.Equals("Declaracion"))
+                            if (variable.Equals(itemTablaSimbolos.variable) && itemTablaSimbolos.tipo.Equals("Declaracion"))
                             {
                                 declarada = true;
                                 break;
@@ -446,17 +465,151 @@ namespace AnalizadorLexico
                 }
 
                 if (resultado)
+                {
+                    con = 0;
+
+                    //Dar valor a las variables de asignación de variables
+                    int mayorope = 0,menorope = 0;
+                    String cadenaOperacion = null, recorridoope = null,variableasignacion = null;
+                    int vueltas = 0;
+                    foreach (var item in nodos)
+                    {
+                        //MessageBox.Show("#" + con.ToString()
+                        //                + " *ITEM: " + item.ToString()
+                        //                + " *associativity: " + item.Associativity.ToString()
+                        //                + " *Span End position: " + item.Span.EndPosition
+                        //                + " *Span Length: " + item.Span.Length
+                        //                + " *Span : Location" + item.Span.Location
+                        //                + " *Term: " + item.Term.ToString()
+                        //                + " *TermErrorAlias: " + item.Term.ErrorAlias
+                        //                + " *itemtermName: " + item.Term.Name);
+                        con++;
+
+                        if (item.Term.Name.Equals("asignacion"))
+                        {
+                            int primerif = 0;
+                            menor = item.Span.EndPosition - item.Span.Length;
+                            mayor = item.Span.EndPosition;
+                            //MessageBox.Show(menor+" "+ mayor);
+                            foreach (var itemTodo in nodos)
+                            {
+                                if (itemTodo.Span.EndPosition <= mayor
+                                    && itemTodo.Span.EndPosition - itemTodo.Span.Length >= menor)
+                                {
+                                    if (itemTodo.Term.Name.Equals("dentrovoid")
+                                        || itemTodo.Term.Name.Equals("asignacion")
+                                        || itemTodo.Term.Name.Equals("asign")
+                                        || itemTodo.Term.Name.Equals("=")
+                                        || itemTodo.Term.Name.Equals("operacion")
+                                        || itemTodo.Term.Name.Equals(";"))
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        if (primerif != 0)
+                                        {
+                                            cadenaOperacion += itemTodo.ToString().Split(' ').ElementAt(0);
+                                    }
+                                    else
+                                    {
+                                        variableasignacion = itemTodo.ToString().Split(' ').ElementAt(0);
+                                    }
+                                        primerif++;
+                                        //MessageBox.Show("#" + con.ToString()
+                                        //+ " *ITEM: " + itemTodo.ToString()
+                                        //+ " *associativity: " + itemTodo.Associativity.ToString()
+                                        //+ " *Span End position: " + itemTodo.Span.EndPosition
+                                        //+ " *Span Length: " + itemTodo.Span.Length
+                                        //+ " *Span : Location" + itemTodo.Span.Location
+                                        //+ " *Term: " + itemTodo.Term.ToString()
+                                        //+ " *TermErrorAlias: " + itemTodo.Term.ErrorAlias
+                                        //+ " *itemtermName: " + itemTodo.Term.Name);
+                                    }
+
+                                }
+                            }
+                            String car, car2;
+                            foreach (DataGridViewRow itemOpe in dtgSemantico.Rows)
+                            {
+                                car = Convert.ToString(itemOpe.Cells["Variable"].Value);
+                                car2 = Convert.ToString(itemOpe.Cells["Valor"].Value);
+                                if (car != "")
+                                {
+                                    cadenaOperacion = cadenaOperacion.Replace(car, car2);
+                                }
+                            }
+                        //MessageBox.Show(cadenaOperacion);
+                        ParseTreeNode resultadoOpe = Sintactico.operaciones(cadenaOperacion);
+                        recorridoope = RecorridoOperacion.resolverOperacion(resultadoOpe);
+                        //MessageBox.Show(recorridoope);
+                        foreach (DataGridViewRow itemTablaSimbolos in dtgSemantico.Rows)
+                        {
+                            if (variableasignacion.Equals(itemTablaSimbolos.Cells["Variable"].Value)
+                                && itemTablaSimbolos.Cells["Tipo"].Value.Equals("Declaracion"))
+                            {
+                                itemTablaSimbolos.Cells["Valor"].Value = recorridoope;
+                            }
+                        }
+                        cadenaOperacion = null;
+                        }
+                    }
+                    //Impresion de valor de variables
+                    foreach (var item in nodos)
+                    {
+                        //MessageBox.Show("#" + con.ToString()
+                        //                + " *ITEM: " + item.ToString()
+                        //                + " *associativity: " + item.Associativity.ToString()
+                        //                + " *Span End position: " + item.Span.EndPosition
+                        //                + " *Span Length: " + item.Span.Length
+                        //                + " *Span : Location" + item.Span.Location
+                        //                + " *Term: " + item.Term.ToString()
+                        //                + " *TermErrorAlias: " + item.Term.ErrorAlias
+                        //                + " *itemtermName: " + item.Term.Name);
+                        con++;
+
+                        if (item.Term.Name.Equals("impresion"))
+                        {
+                            
+                            menor = item.Span.EndPosition - item.Span.Length;
+                            mayor = item.Span.EndPosition;
+                            //MessageBox.Show(menor+" "+ mayor);
+                            foreach (var item1 in nodos)
+                            {
+                                if((item1.Term.Name.Equals("id"))
+                                && (item1.Span.EndPosition <= mayor
+                                && (item1.Span.EndPosition - item1.Span.Length) >= menor))
+                                {
+                                    foreach (DataGridViewRow itemTablaSimbolos in dtgSemantico.Rows)
+                                    {
+                                        if(item1.ToString().Split(' ').ElementAt(0).Equals(itemTablaSimbolos.Cells["Variable"].Value))
+                                        {
+                                            if(itemTablaSimbolos.Cells["Valor"].Value == null)
+                                            {
+                                                MessageBox.Show("Variable sin valor asignado");
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show(itemTablaSimbolos.Cells["Valor"].Value.ToString());
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
                     MessageBox.Show("Compilación correcta");
-                else
-                    MessageBox.Show("Error de compilación");
+                }
+                else MessageBox.Show("Error de compilación");
 
                 ts.Clear();
                 LlenadoTablaSimbolos();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error de compilación");
-            }
+            //}
+            //catch(Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)

@@ -49,10 +49,6 @@
             this.Indice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.semantico = new System.Windows.Forms.TabPage();
             this.dtgSemantico = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabLexico = new System.Windows.Forms.TabPage();
@@ -87,6 +83,10 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoDeDato = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Variable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.sintactico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgToken)).BeginInit();
@@ -266,10 +266,10 @@
             this.dtgSemantico.ColumnHeadersHeight = 40;
             this.dtgSemantico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dtgSemantico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
+            this.Tipo,
+            this.TipoDeDato,
+            this.Variable,
+            this.Valor});
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Calibri", 12F);
@@ -298,34 +298,6 @@
             this.dtgSemantico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgSemantico.Size = new System.Drawing.Size(339, 569);
             this.dtgSemantico.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Tipo";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 63;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Tipo de Dato";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 121;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Variable";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 88;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Valor";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 68;
             // 
             // Timer1
             // 
@@ -760,6 +732,34 @@
             this.panel4.Size = new System.Drawing.Size(353, 601);
             this.panel4.TabIndex = 8;
             // 
+            // Tipo
+            // 
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            this.Tipo.Width = 63;
+            // 
+            // TipoDeDato
+            // 
+            this.TipoDeDato.HeaderText = "Tipo de Dato";
+            this.TipoDeDato.Name = "TipoDeDato";
+            this.TipoDeDato.ReadOnly = true;
+            this.TipoDeDato.Width = 121;
+            // 
+            // Variable
+            // 
+            this.Variable.HeaderText = "Variable";
+            this.Variable.Name = "Variable";
+            this.Variable.ReadOnly = true;
+            this.Variable.Width = 88;
+            // 
+            // Valor
+            // 
+            this.Valor.HeaderText = "Valor";
+            this.Valor.Name = "Valor";
+            this.Valor.ReadOnly = true;
+            this.Valor.Width = 68;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -813,10 +813,6 @@
         private System.Windows.Forms.TabPage sintactico;
         private System.Windows.Forms.TabPage semantico;
         private System.Windows.Forms.DataGridView dtgSemantico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button btnCer;
@@ -844,6 +840,10 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoDeDato;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Variable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Valor;
     }
 }
 
