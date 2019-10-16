@@ -81,6 +81,9 @@
     <Compile Include="RecorridoParseTree.cs" />
     <Compile Include="RegexLexer.cs" />
     <Compile Include="Sintactico.cs" />
+    <Compile Include="SyntaxRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TablaSimbolos.cs" />
     <Compile Include="Token.cs" />
     <EmbeddedResource Include="Form1.resx">

@@ -22,6 +22,39 @@ namespace AnalizadorLexico
         public Form1()
         {
             InitializeComponent();
+
+            // Add the keywords to the list.
+            textoCodigo.Settings.Keywords.Add("usando");
+            textoCodigo.Settings.Keywords.Add("entero");
+            textoCodigo.Settings.Keywords.Add("doble");
+            textoCodigo.Settings.Keywords.Add("imprimir");
+            textoCodigo.Settings.Keywords.Add("publico");
+            textoCodigo.Settings.Keywords.Add("privado");
+            textoCodigo.Settings.Keywords.Add("sino");
+            textoCodigo.Settings.Keywords.Add("privado");
+            textoCodigo.Settings.Keywords.Add("para");
+
+            // Set the comment identifier. For Lua this is two minus-signs after each other (--). 
+            // For C++ we would set this property to "//".
+            textoCodigo.Settings.Comment = "//";
+
+            // Set the colors that will be used.
+            textoCodigo.Settings.KeywordColor = Color.FromArgb(81, 180, 1);
+            textoCodigo.Settings.CommentColor = Color.FromArgb(150,150,150);
+            textoCodigo.Settings.StringColor = Color.Blue;
+            textoCodigo.Settings.IntegerColor = Color.OrangeRed;
+
+            // Let's not process strings and integers.
+            textoCodigo.Settings.EnableStrings = false;
+            textoCodigo.Settings.EnableIntegers = false;
+
+            // Let's make the settings we just set valid by compiling
+            // the keywords to a regular expression.
+            textoCodigo.CompileKeywords();
+
+            // Load a file and update the syntax highlighting.
+            textoCodigo.ProcessAllLines();
+
         }
         RegexLexer csLexer = new RegexLexer();
         bool load;
