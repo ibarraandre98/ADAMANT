@@ -14,8 +14,8 @@ namespace AnalizadorLexico
         {
             #region ER
             RegexBasedTerminal id = new RegexBasedTerminal("id", "[_a-zA-Z]+([0-9]+)?");
-            RegexBasedTerminal numero = new RegexBasedTerminal("numero", "[0-9]+");
-            RegexBasedTerminal numerodecimal = new RegexBasedTerminal("numero-decimal", "[0-9]+.[0-9]+");
+            RegexBasedTerminal numero = new RegexBasedTerminal("numero", "-?[0-9]+");
+            RegexBasedTerminal numerodecimal = new RegexBasedTerminal("numero-decimal", "-?[0-9]+(\\.?[0-9]+)?");
             RegexBasedTerminal cualquier = new RegexBasedTerminal("cualquier", "\"[^\"]*\"");
             RegexBasedTerminal cualquiercar = new RegexBasedTerminal("cualquiercar", "\'.?\'");
             #endregion
@@ -149,6 +149,7 @@ namespace AnalizadorLexico
             var reservadaraiz = ToTerm("√");
             var reservadaasignacion = ToTerm("->");
             var reservadaas = ToTerm("asign");
+            var reservadaain = ToTerm("<>in");
 
             #endregion
             #region No Terminales
@@ -178,6 +179,7 @@ namespace AnalizadorLexico
             NonTerminal impresion = new NonTerminal("impresion");
             NonTerminal operacion = new NonTerminal("operacion");
             NonTerminal asignacion = new NonTerminal("asignacion");
+            NonTerminal ain = new NonTerminal("ain");
             
 
             //NonTerminal palabrasreservadas = new NonTerminal("palabrasreservadas");
@@ -241,7 +243,6 @@ namespace AnalizadorLexico
                 | Empty;
 
             declaracion.Rule = reservadaentero + id + reservadaigual + numero + reservadapuntocoma
-                | reservadaentero + id + reservadaigual + operacion + reservadapuntocoma
                 | reservadalargo + id + reservadaigual + numero + reservadapuntocoma
                 | reservadaflotante + id + reservadaigual + numerodecimal + reservadapuntocoma
                 | reservadadoble + id + reservadaigual + numerodecimal + reservadapuntocoma
@@ -257,6 +258,12 @@ namespace AnalizadorLexico
                 | reservadavariable + id + reservadaigual + reservadafalso + reservadapuntocoma
                 | reservadavariable + id + reservadaigual + cualquier + reservadapuntocoma
                 | reservadavariable + id + reservadaigual + cualquiercar + reservadapuntocoma
+                | reservadavariable + id + reservadaigual + reservadaain + reservadapuntocoma
+                | reservadaentero + id + reservadaigual + reservadaain + reservadapuntocoma
+                | reservadalargo + id + reservadaigual + reservadaain + reservadapuntocoma
+                | reservadadoble + id + reservadaigual + reservadaain + reservadapuntocoma
+                | reservadacadena + id + reservadaigual + reservadaain + reservadapuntocoma
+                | reservadacaracter + id + reservadaigual + reservadaain + reservadapuntocoma
                 | reservadaentero + id + reservadapuntocoma
                 | reservadalargo + id + reservadapuntocoma
                 | reservadaflotante + id + reservadapuntocoma
@@ -321,12 +328,14 @@ namespace AnalizadorLexico
                 | operacion + reservadaentre + operacion
                 | id
                 | numero
+                | numerodecimal
                 | reservadaparentesisabrir + operacion + reservadaparentesiscerrar
                 | operacion + reservadaraiz + operacion
                 | operacion + reservadapotencia + operacion;
 
 
-            impresion.Rule = reservadaimprimir + reservadaparentesisabrir + operacion + reservadaparentesiscerrar + reservadapuntocoma;
+            impresion.Rule = reservadaimprimir + reservadaparentesisabrir + operacion + reservadaparentesiscerrar + reservadapuntocoma
+                |reservadaimprimir + reservadaparentesisabrir + cualquier + reservadaparentesiscerrar + reservadapuntocoma;
 
             asignacion.Rule = reservadaas + id + reservadaigual + operacion + reservadapuntocoma
                 | reservadaas + id + reservadaigual + numero + reservadapuntocoma;
@@ -393,7 +402,6 @@ namespace AnalizadorLexico
 
             #region Preferencias
             this.Root = raiz;
-
             #endregion
         }
     }

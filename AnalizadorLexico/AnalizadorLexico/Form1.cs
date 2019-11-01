@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Irony.Ast;
 using Irony.Parsing;
+using Microsoft.VisualBasic;
 
 
 namespace AnalizadorLexico
@@ -244,8 +245,17 @@ namespace AnalizadorLexico
             }
             if (textoCodigo.TextLength == 0)
             {
-                dtgToken.Rows.Clear();
+                limpiar();
             }
+        }
+
+        private void limpiar()
+        {
+            dtgSemantico.Rows.Clear();
+            dtgToken.Rows.Clear();
+            ts.Clear();
+            LlenadoTablaSimbolos();
+            tbConsola.Clear();
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -285,6 +295,7 @@ namespace AnalizadorLexico
         {
             try
             {
+                limpiar();
                 if (textoCodigo.TextLength == 0)
                     MessageBox.Show("No se puede compilar esta vacío");
                 else
@@ -299,18 +310,18 @@ namespace AnalizadorLexico
                 int menor = 0, mayor = 0;
                 foreach (var item in nodos)
                 {
-                    //MessageBox.Show("#" + con.ToString()
-                    //+ " *ITEM: " + item.ToString()
-                    //+ " *associativity: " + item.Associativity.ToString()
-                    //+ " *Span End position: " + item.Span.EndPosition
-                    //+ " *Span Length: " + item.Span.Length
-                    //+ " *Span : Location" + item.Span.Location
-                    //+ " *Term: " + item.Term.ToString()
-                    //+ " *TermErrorAlias: " + item.Term.ErrorAlias
-                    //+ " *itemtermName: " + item.Term.Name);
+                //MessageBox.Show("#" + con.ToString()
+                //+ " *ITEM: " + item.ToString()
+                //+ " *associativity: " + item.Associativity.ToString()
+                //+ " *Span End position: " + item.Span.EndPosition
+                //+ " *Span Length: " + item.Span.Length
+                //+ " *Span : Location" + item.Span.Location
+                //+ " *Term: " + item.Term.ToString()
+                //+ " *TermErrorAlias: " + item.Term.ErrorAlias
+                //+ " *itemtermName: " + item.Term.Name);
 
 
-                    if (item.Term.Name.Equals("Declaracion"))
+                if (item.Term.Name.Equals("Declaracion"))
                     {
                         String tipodedato = null, variable = null, valor = null;
                         menor = item.Span.EndPosition - item.Span.Length;
@@ -336,7 +347,8 @@ namespace AnalizadorLexico
                                 || item1.Term.Name.Equals("numero") 
                                 || item1.Term.Name.Equals("numero-decimal") 
                                 || item1.Term.Name.Equals("cualquier") 
-                                || item1.Term.Name.Equals("cualquiercar")) 
+                                || item1.Term.Name.Equals("cualquiercar")
+                                || item1.Term.Name.Equals("<>in")) 
                                 && (item1.Span.EndPosition <= mayor 
                                 && (item1.Span.EndPosition - item1.Span.Length) >= menor))
                             {
@@ -360,12 +372,19 @@ namespace AnalizadorLexico
                                     {
                                         valor = null;
                                         //MessageBox.Show(item1.ToString() + "muski");
+                                    }else if (item1.Term.Name.Equals("cualquier"))
+                                    {
+                                        valor = item1.ToString().Split('"').ElementAt(1);
                                     }
                                     else
                                     {
                                         valor = item1.ToString().Split(' ').ElementAt(0);
                                         //MessageBox.Show(item1.ToString() + "muski");
                                     }
+                                }
+                                if (item1.Term.Name.Equals("<>in"))
+                                {
+                                    valor = Interaction.InputBox("Leer por teclado","Ingrese el valor de "+valor,"0");
                                 }
                             //    MessageBox.Show("#" + con.ToString()
                             //+ " *ITEM: " + item1.ToString()
@@ -397,7 +416,10 @@ namespace AnalizadorLexico
                         if (declarada == true)
                         {
                             resultado = false;
-                            MessageBox.Show("Error está declarando dos o mas veces la variable \"" + variable + "\", ya se encuentra declarada");
+                            tbConsola.SelectionStart = tbConsola.TextLength;
+                            tbConsola.SelectionLength = 0;
+                            tbConsola.SelectionColor = Color.Red;
+                            tbConsola.Text += ("Error está declarando dos o mas veces la variable \"" + variable + "\", ya se encuentra declarada") + Environment.NewLine;
                         }
                         else
                         {
@@ -432,7 +454,7 @@ namespace AnalizadorLexico
                         else
                         {
                             resultado = false;
-                            MessageBox.Show("No se ha declarado la variable: " + var + " en la linea: " + item.Span.Location);
+                            tbConsola.Text += ("No se ha declarado la variable: " + var + " en la linea: " + item.Span.Location) + Environment.NewLine;
                         }
 
                     }
@@ -450,7 +472,7 @@ namespace AnalizadorLexico
                         {
                             if (var[0].Equals(item1.variable) && item1.tipo.Equals("Reservada"))
                             {
-                                MessageBox.Show("Error no puede utilizar \"" + var[0] + "\" es una palabra reservada en la linea: " + item.Span.Location);
+                                tbConsola.Text += ("Error no puede utilizar \"" + var[0] + "\" es una palabra reservada en la linea: " + item.Span.Location) + Environment.NewLine;
                                 resultado = false;
                             }
                         }
@@ -470,7 +492,8 @@ namespace AnalizadorLexico
 
                     //Dar valor a las variables de asignación de variables
                     int mayorope = 0,menorope = 0;
-                    String cadenaOperacion = null, recorridoope = null,variableasignacion = null;
+                    String cadenaOperacion = null, recorridoope = null,variableasignacion = null, tipoDeclaracion = null;
+                    Boolean tipoIgual;
                     int vueltas = 0;
                     foreach (var item in nodos)
                     {
@@ -510,11 +533,32 @@ namespace AnalizadorLexico
                                         if (primerif != 0)
                                         {
                                             cadenaOperacion += itemTodo.ToString().Split(' ').ElementAt(0);
-                                    }
-                                    else
-                                    {
-                                        variableasignacion = itemTodo.ToString().Split(' ').ElementAt(0);
-                                    }
+                                            //Va a checar si es el mismo tipo de dato
+                                            //cadenaOperacion += itemTodo.ToString().Split(' ').ElementAt(1);
+                                            //if (tipoDeclaracion.Equals("id"))
+                                            //{
+                                            //    foreach (DataGridViewRow itemdeclaracion in dtgSemantico.Rows)
+                                            //    {
+                                            //        if(itemTodo.ToString().Split(' ').ElementAt(0).Equals(itemdeclaracion.Cells["Variable"].Value.ToString()))
+                                            //        {
+                                            //            if (variableasignacion.Equals(itemdeclaracion.Cells["TipoDeDato"].Value.ToString()))
+                                            //            {
+                                            //                tipoIgual = true;
+                                            //            }
+                                            //            else
+                                            //            {
+                                            //                tipoIgual = false;
+                                            //                MessageBox.Show("Es distinto el tipo de dato");
+                                            //                break;
+                                            //            }
+                                            //        }
+                                            //    }
+                                            //}
+                                        }
+                                        else
+                                        {
+                                            variableasignacion = itemTodo.ToString().Split(' ').ElementAt(0);
+                                        }
                                         primerif++;
                                         //MessageBox.Show("#" + con.ToString()
                                         //+ " *ITEM: " + itemTodo.ToString()
@@ -529,6 +573,7 @@ namespace AnalizadorLexico
 
                                 }
                             }
+                       
                             String car, car2;
                             foreach (DataGridViewRow itemOpe in dtgSemantico.Rows)
                             {
@@ -542,8 +587,8 @@ namespace AnalizadorLexico
                         //MessageBox.Show(cadenaOperacion);
                         ParseTreeNode resultadoOpe = Sintactico.operaciones(cadenaOperacion);
                         recorridoope = RecorridoOperacion.resolverOperacion(resultadoOpe);
-                        //MessageBox.Show(recorridoope);
-                        foreach (DataGridViewRow itemTablaSimbolos in dtgSemantico.Rows)
+                            //MessageBox.Show(recorridoope);
+                            foreach (DataGridViewRow itemTablaSimbolos in dtgSemantico.Rows)
                         {
                             if (variableasignacion.Equals(itemTablaSimbolos.Cells["Variable"].Value)
                                 && itemTablaSimbolos.Cells["Tipo"].Value.Equals("Declaracion"))
@@ -586,20 +631,31 @@ namespace AnalizadorLexico
                                         {
                                             if(itemTablaSimbolos.Cells["Valor"].Value == null)
                                             {
-                                                MessageBox.Show("Variable sin valor asignado");
+                                                tbConsola.Text += (itemTablaSimbolos.Cells["Variable"].Value + " Variable sin valor asignado") + Environment.NewLine;
                                             }
                                             else
                                             {
-                                                MessageBox.Show(itemTablaSimbolos.Cells["Valor"].Value.ToString());
+                                                tbConsola.Text += (itemTablaSimbolos.Cells["Valor"].Value.ToString() + Environment.NewLine);
                                             }
                                         }
                                     }
+                                }else if((item1.Term.Name.Equals("cualquier"))
+                                    && (item1.Span.EndPosition <= mayor
+                                    && (item1.Span.EndPosition - item1.Span.Length) >= menor))
+                                {
+                                    tbConsola.Text += (item1.ToString().Split('"').ElementAt(1)) + Environment.NewLine;
+                                }else if ((item1.Term.Name.Equals("numero")|| (item1.Term.Name.Equals("numero-decimal")))
+                                    && (item1.Span.EndPosition <= mayor
+                                    && (item1.Span.EndPosition - item1.Span.Length) >= menor))
+                                {
+                                    tbConsola.Text += (item1.ToString().Split(' ').ElementAt(0)) + Environment.NewLine;
                                 }
-                                
+   
                             }
                         }
                     }
-                    MessageBox.Show("Compilación correcta");
+                    //String a = Interaction.InputBox("Ingrese valor","Input","",-1,-1);
+                    tbConsola.Text += ("Compilación correcta") + Environment.NewLine;
                 }
                 else MessageBox.Show("Error de compilación");
 
@@ -608,7 +664,7 @@ namespace AnalizadorLexico
         }
             catch(NullReferenceException ex)
             {
-                MessageBox.Show("Error de compilación");
+                MessageBox.Show("Excepción "+ex.Message);
             }
             catch(Exception ex)
             {

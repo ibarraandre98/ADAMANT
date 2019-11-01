@@ -12,7 +12,8 @@ namespace AnalizadorLexico
         public GramaticaOperaciones() : base(caseSensitive: false)
         {
             #region 
-            RegexBasedTerminal numero = new RegexBasedTerminal("numero", "-?[0-9]+(\\,?[0-9])?");
+            RegexBasedTerminal numero = new RegexBasedTerminal("numero", "-?[0-9]+");
+            RegexBasedTerminal numerodecimal = new RegexBasedTerminal("numero-decimal", "-?[0-9]+(\\.?[0-9]+)?");
             //RegexBasedTerminal numerodecimal = new RegexBasedTerminal("numero decimal", "-?[0-9]+.[0-9]+");
             RegexBasedTerminal variable = new RegexBasedTerminal("variable", "[a-zA-Z]+[0-9]*");
             #endregion
@@ -52,6 +53,7 @@ namespace AnalizadorLexico
                 | nodos + div + nodos
                 | variable
                 | numero
+                | numerodecimal
                 | parentesisizquierdo + nodos + parentesisderecho
                 | nodos + raizcuad + nodos
                 | nodos + potencia + nodos

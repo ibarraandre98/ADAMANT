@@ -15,6 +15,7 @@ namespace AnalizadorLexico
             //MessageBox.Show(root.ChildNodes.ElementAt(0).ToString());
             //MessageBox.Show("El resultado es: " + expresion(root.ChildNodes.ElementAt(0)));
             String retorno = expresion(root.ChildNodes.ElementAt(0)).ToString();
+            
             return retorno;
         }
 
@@ -30,6 +31,7 @@ namespace AnalizadorLexico
                     switch (root.ChildNodes.ElementAt(1).ToString().Substring(0, 1))
                     {
                         case "+": //E + E
+
                             return expresion(root.ChildNodes.ElementAt(0)) + expresion(root.ChildNodes.ElementAt(2));
                         case "-":
                             return expresion(root.ChildNodes.ElementAt(0)) - expresion(root.ChildNodes.ElementAt(2));

@@ -49,6 +49,10 @@
             this.Indice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.semantico = new System.Windows.Forms.TabPage();
             this.dtgSemantico = new System.Windows.Forms.DataGridView();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoDeDato = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Variable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabLexico = new System.Windows.Forms.TabPage();
@@ -83,10 +87,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoDeDato = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Variable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbConsola = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.sintactico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgToken)).BeginInit();
@@ -299,6 +300,34 @@
             this.dtgSemantico.Size = new System.Drawing.Size(339, 569);
             this.dtgSemantico.TabIndex = 1;
             // 
+            // Tipo
+            // 
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            this.Tipo.Width = 63;
+            // 
+            // TipoDeDato
+            // 
+            this.TipoDeDato.HeaderText = "Tipo de Dato";
+            this.TipoDeDato.Name = "TipoDeDato";
+            this.TipoDeDato.ReadOnly = true;
+            this.TipoDeDato.Width = 121;
+            // 
+            // Variable
+            // 
+            this.Variable.HeaderText = "Variable";
+            this.Variable.Name = "Variable";
+            this.Variable.ReadOnly = true;
+            this.Variable.Width = 88;
+            // 
+            // Valor
+            // 
+            this.Valor.HeaderText = "Valor";
+            this.Valor.Name = "Valor";
+            this.Valor.ReadOnly = true;
+            this.Valor.Width = 68;
+            // 
             // Timer1
             // 
             this.Timer1.Tick += new System.EventHandler(this.Timer1_Tick);
@@ -312,7 +341,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1280, 601);
+            this.tabControl.Size = new System.Drawing.Size(927, 601);
             this.tabControl.TabIndex = 0;
             // 
             // tabLexico
@@ -320,10 +349,11 @@
             this.tabLexico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
             this.tabLexico.Controls.Add(this.textoCodigo);
             this.tabLexico.Controls.Add(this.pictureBox1);
+            this.tabLexico.Controls.Add(this.tbConsola);
             this.tabLexico.Location = new System.Drawing.Point(4, 22);
             this.tabLexico.Name = "tabLexico";
             this.tabLexico.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLexico.Size = new System.Drawing.Size(1272, 575);
+            this.tabLexico.Size = new System.Drawing.Size(919, 575);
             this.tabLexico.TabIndex = 0;
             this.tabLexico.Text = "Analizador";
             // 
@@ -334,7 +364,7 @@
             this.textoCodigo.Font = new System.Drawing.Font("Calibri", 14.25F);
             this.textoCodigo.Location = new System.Drawing.Point(45, 3);
             this.textoCodigo.Name = "textoCodigo";
-            this.textoCodigo.Size = new System.Drawing.Size(1224, 569);
+            this.textoCodigo.Size = new System.Drawing.Size(871, 490);
             this.textoCodigo.TabIndex = 1;
             this.textoCodigo.Text = "";
             this.textoCodigo.TextChanged += new System.EventHandler(this.textoCodigo_TextChanged);
@@ -346,7 +376,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(42, 569);
+            this.pictureBox1.Size = new System.Drawing.Size(42, 490);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -719,7 +749,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 119);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1280, 601);
+            this.panel1.Size = new System.Drawing.Size(927, 601);
             this.panel1.TabIndex = 7;
             // 
             // panel4
@@ -732,33 +762,14 @@
             this.panel4.Size = new System.Drawing.Size(353, 601);
             this.panel4.TabIndex = 8;
             // 
-            // Tipo
+            // tbConsola
             // 
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.ReadOnly = true;
-            this.Tipo.Width = 63;
-            // 
-            // TipoDeDato
-            // 
-            this.TipoDeDato.HeaderText = "Tipo de Dato";
-            this.TipoDeDato.Name = "TipoDeDato";
-            this.TipoDeDato.ReadOnly = true;
-            this.TipoDeDato.Width = 121;
-            // 
-            // Variable
-            // 
-            this.Variable.HeaderText = "Variable";
-            this.Variable.Name = "Variable";
-            this.Variable.ReadOnly = true;
-            this.Variable.Width = 88;
-            // 
-            // Valor
-            // 
-            this.Valor.HeaderText = "Valor";
-            this.Valor.Name = "Valor";
-            this.Valor.ReadOnly = true;
-            this.Valor.Width = 68;
+            this.tbConsola.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tbConsola.Location = new System.Drawing.Point(3, 493);
+            this.tbConsola.Name = "tbConsola";
+            this.tbConsola.Size = new System.Drawing.Size(913, 79);
+            this.tbConsola.TabIndex = 3;
+            this.tbConsola.Text = "";
             // 
             // Form1
             // 
@@ -766,8 +777,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.ClientSize = new System.Drawing.Size(1280, 720);
-            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -844,6 +855,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoDeDato;
         private System.Windows.Forms.DataGridViewTextBoxColumn Variable;
         private System.Windows.Forms.DataGridViewTextBoxColumn Valor;
+        private System.Windows.Forms.RichTextBox tbConsola;
     }
 }
 
