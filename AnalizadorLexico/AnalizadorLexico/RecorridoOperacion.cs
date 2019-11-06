@@ -31,7 +31,6 @@ namespace AnalizadorLexico
                     switch (root.ChildNodes.ElementAt(1).ToString().Substring(0, 1))
                     {
                         case "+": //E + E
-
                             return expresion(root.ChildNodes.ElementAt(0)) + expresion(root.ChildNodes.ElementAt(2));
                         case "-":
                             return expresion(root.ChildNodes.ElementAt(0)) - expresion(root.ChildNodes.ElementAt(2));

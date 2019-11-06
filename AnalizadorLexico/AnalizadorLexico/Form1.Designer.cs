@@ -58,6 +58,7 @@
             this.tabLexico = new System.Windows.Forms.TabPage();
             this.textoCodigo = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tbConsola = new System.Windows.Forms.RichTextBox();
             this.OFD = new System.Windows.Forms.OpenFileDialog();
             this.SFD = new System.Windows.Forms.SaveFileDialog();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -87,7 +88,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.tbConsola = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.sintactico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgToken)).BeginInit();
@@ -381,6 +381,15 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
+            // tbConsola
+            // 
+            this.tbConsola.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tbConsola.Location = new System.Drawing.Point(3, 493);
+            this.tbConsola.Name = "tbConsola";
+            this.tbConsola.Size = new System.Drawing.Size(913, 79);
+            this.tbConsola.TabIndex = 3;
+            this.tbConsola.Text = "";
+            // 
             // OFD
             // 
             this.OFD.FileName = "openFileDialog1";
@@ -394,10 +403,10 @@
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.White;
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(56, 0);
+            this.pictureBox4.Location = new System.Drawing.Point(56, 3);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(123, 35);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.Size = new System.Drawing.Size(136, 26);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 18;
             this.pictureBox4.TabStop = false;
             // 
@@ -761,15 +770,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(353, 601);
             this.panel4.TabIndex = 8;
-            // 
-            // tbConsola
-            // 
-            this.tbConsola.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tbConsola.Location = new System.Drawing.Point(3, 493);
-            this.tbConsola.Name = "tbConsola";
-            this.tbConsola.Size = new System.Drawing.Size(913, 79);
-            this.tbConsola.TabIndex = 3;
-            this.tbConsola.Text = "";
             // 
             // Form1
             // 
