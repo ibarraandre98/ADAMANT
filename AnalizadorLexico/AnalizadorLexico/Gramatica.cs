@@ -180,6 +180,8 @@ namespace AnalizadorLexico
             NonTerminal operacion = new NonTerminal("operacion");
             NonTerminal asignacion = new NonTerminal("asignacion");
             NonTerminal ain = new NonTerminal("ain");
+            NonTerminal condicionalsi = new NonTerminal("condicionalsi");
+            NonTerminal condicionalsino = new NonTerminal("condicionalsino");
             
 
             //NonTerminal palabrasreservadas = new NonTerminal("palabrasreservadas");
@@ -273,13 +275,12 @@ namespace AnalizadorLexico
                 | reservadacaracter + id + reservadapuntocoma
                 | reservadavariable + id + reservadapuntocoma;
 
-            condicional.Rule = reservadasi + reservadaparentesisabrir + id + operadores + numero + reservadaparentesiscerrar + reservadallaveabrir + Empty + reservadallavecerrar
-                | reservadasi + reservadaparentesisabrir + id + operadores + numero + reservadaparentesiscerrar + reservadallaveabrir + dentrovoid + reservadallavecerrar
-                | reservadasi + reservadaparentesisabrir + id + operadores + numero + reservadaparentesiscerrar + reservadallaveabrir + Empty + reservadallavecerrar + reservadasino + reservadallaveabrir + Empty + reservadallavecerrar
-                | reservadasi + reservadaparentesisabrir + id + operadores + numero + reservadaparentesiscerrar + reservadallaveabrir + dentrovoid + reservadallavecerrar + reservadasino + reservadallaveabrir + dentrovoid + reservadallavecerrar
-                | reservadasi + reservadaparentesisabrir + id + operadores + numero + reservadaparentesiscerrar + reservadallaveabrir + Empty + reservadallavecerrar + reservadasino + reservadallaveabrir + dentrovoid + reservadallavecerrar
-                | reservadasi + reservadaparentesisabrir + id + operadores + numero + reservadaparentesiscerrar + reservadallaveabrir + dentrovoid + reservadallavecerrar + reservadasino + reservadallaveabrir + Empty + reservadallavecerrar;
+            condicional.Rule = condicionalsi
+                |condicionalsi + condicionalsino;
 
+            condicionalsi.Rule = reservadasi + reservadaparentesisabrir + id + operadores + id + reservadaparentesiscerrar + reservadallaveabrir + dentrovoid + reservadallavecerrar;
+
+            condicionalsino.Rule = reservadasino + reservadallaveabrir + dentrovoid + reservadallavecerrar;
 
             para.Rule = reservadapara + reservadaparentesisabrir + tipodedatonumerico + id + reservadaigual + numvar + reservadapuntocoma + id + operadores + numvar + reservadapuntocoma + id + operadoresincrementos + reservadaparentesiscerrar + reservadallaveabrir + Empty + reservadallavecerrar
                 | reservadapara + reservadaparentesisabrir + tipodedatonumerico + id + reservadaigual + numvar + reservadapuntocoma + id + operadores + numvar + reservadapuntocoma + id + operadoresincrementos + reservadaparentesiscerrar + reservadallaveabrir + dentrovoid + reservadallavecerrar;

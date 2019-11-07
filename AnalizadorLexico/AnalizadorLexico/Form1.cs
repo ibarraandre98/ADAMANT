@@ -298,8 +298,7 @@ namespace AnalizadorLexico
                 limpiar();
                 if (textoCodigo.TextLength == 0)
                     MessageBox.Show("No se puede compilar esta vacío");
-                else
-                if (load == true)
+                else if (load == true)
                     AnalizeCode();
                 bool resultado = Sintactico.analizar(textoCodigo.Text);
                 dtgSemantico.Rows.Clear();
