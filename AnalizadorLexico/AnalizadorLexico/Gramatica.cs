@@ -182,7 +182,8 @@ namespace AnalizadorLexico
             NonTerminal ain = new NonTerminal("ain");
             NonTerminal condicionalsi = new NonTerminal("condicionalsi");
             NonTerminal condicionalsino = new NonTerminal("condicionalsino");
-            
+            NonTerminal impresionCompleja = new NonTerminal("impresionCompleja");
+            NonTerminal dentroImpresion = new NonTerminal("dentroImpresion");
 
             //NonTerminal palabrasreservadas = new NonTerminal("palabrasreservadas");
             NonTerminal raiz = new NonTerminal("raiz");
@@ -234,6 +235,7 @@ namespace AnalizadorLexico
                 | dentrovoid + hacer + dentrovoid
                 | dentrovoid + interruptor + dentrovoid
                 | dentrovoid + impresion +dentrovoid
+                | dentrovoid + impresionCompleja + dentrovoid
                 | asignacion
                 | declaracion
                 | condicional
@@ -242,6 +244,7 @@ namespace AnalizadorLexico
                 | hacer
                 | interruptor
                 | impresion
+                | impresionCompleja
                 | Empty;
 
             declaracion.Rule = reservadaentero + id + reservadaigual + numero + reservadapuntocoma
@@ -337,6 +340,17 @@ namespace AnalizadorLexico
 
             impresion.Rule = reservadaimprimir + reservadaparentesisabrir + operacion + reservadaparentesiscerrar + reservadapuntocoma
                 |reservadaimprimir + reservadaparentesisabrir + cualquier + reservadaparentesiscerrar + reservadapuntocoma;
+
+            impresionCompleja.Rule = reservadaimprimir + reservadaparentesisabrir + dentroImpresion + reservadaparentesiscerrar + reservadapuntocoma
+                | reservadaimprimir + reservadaparentesisabrir + dentroImpresion + reservadaparentesiscerrar + reservadapuntocoma;
+
+            dentroImpresion.Rule = cualquier + reservadamas + dentroImpresion
+                | id + reservadamas + dentroImpresion
+                | numero + reservadamas + dentroImpresion
+                | cualquier
+                | id
+                | numero
+                ;
 
             asignacion.Rule = reservadaas + id + reservadaigual + operacion + reservadapuntocoma
                 | reservadaas + id + reservadaigual + numero + reservadapuntocoma;

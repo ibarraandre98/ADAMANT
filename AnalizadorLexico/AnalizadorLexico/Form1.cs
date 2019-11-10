@@ -655,6 +655,46 @@ namespace AnalizadorLexico
 
                             }
                         }
+                        if (item.Term.Name.Equals("impresionCompleja"))
+                        {
+                            menor = item.Span.EndPosition - item.Span.Length;
+                            mayor = item.Span.EndPosition;
+                            foreach (var item1 in nodos)
+                            {
+                                if ((item1.Term.Name.Equals("cualquier"))
+                                   && (item1.Span.EndPosition <= mayor
+                                   && (item1.Span.EndPosition - item1.Span.Length) >= menor))
+                                {
+                                    tbConsola.Text += (item1.ToString().Split('"').ElementAt(1));
+                                }
+                                if ((item1.Term.Name.Equals("id"))
+                                && (item1.Span.EndPosition <= mayor
+                                && (item1.Span.EndPosition - item1.Span.Length) >= menor))
+                                {
+                                    foreach (DataGridViewRow itemTablaSimbolos in dtgSemantico.Rows)
+                                    {
+                                        if (item1.ToString().Split(' ').ElementAt(0).Equals(itemTablaSimbolos.Cells["Variable"].Value))
+                                        {
+                                            if (itemTablaSimbolos.Cells["Valor"].Value == null)
+                                            {
+                                                tbConsola.Text += (itemTablaSimbolos.Cells["Variable"].Value + " Variable sin valor asignado");
+                                            }
+                                            else
+                                            {
+                                                tbConsola.Text += (itemTablaSimbolos.Cells["Valor"].Value.ToString());
+                                            }
+                                        }
+                                    }
+                                }
+                                else if ((item1.Term.Name.Equals("numero") || (item1.Term.Name.Equals("numero-decimal")))
+                                  && (item1.Span.EndPosition <= mayor
+                                  && (item1.Span.EndPosition - item1.Span.Length) >= menor))
+                                {
+                                    tbConsola.Text += (item1.ToString().Split(' ').ElementAt(0)) + Environment.NewLine;
+                                }
+                            }
+                            tbConsola.Text += Environment.NewLine;
+                        }
                         if (item.Term.Name.Equals("condicional"))
                         {
                             menor = item.Span.EndPosition - item.Span.Length;
