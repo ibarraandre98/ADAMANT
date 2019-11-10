@@ -150,6 +150,7 @@ namespace AnalizadorLexico
             var reservadaasignacion = ToTerm("->");
             var reservadaas = ToTerm("asign");
             var reservadaain = ToTerm("<>in");
+            var reservadaascad = ToTerm("asignC");
 
             #endregion
             #region No Terminales
@@ -184,6 +185,8 @@ namespace AnalizadorLexico
             NonTerminal condicionalsino = new NonTerminal("condicionalsino");
             NonTerminal impresionCompleja = new NonTerminal("impresionCompleja");
             NonTerminal dentroImpresion = new NonTerminal("dentroImpresion");
+            NonTerminal asignacionCadena = new NonTerminal("asignacionCadena");
+            NonTerminal dentroAsignacionCadena = new NonTerminal("dentroAsignacionCadena");
 
             //NonTerminal palabrasreservadas = new NonTerminal("palabrasreservadas");
             NonTerminal raiz = new NonTerminal("raiz");
@@ -236,6 +239,7 @@ namespace AnalizadorLexico
                 | dentrovoid + interruptor + dentrovoid
                 | dentrovoid + impresion +dentrovoid
                 | dentrovoid + impresionCompleja + dentrovoid
+                | dentrovoid + asignacionCadena + dentrovoid
                 | asignacion
                 | declaracion
                 | condicional
@@ -245,6 +249,7 @@ namespace AnalizadorLexico
                 | interruptor
                 | impresion
                 | impresionCompleja
+                | asignacionCadena
                 | Empty;
 
             declaracion.Rule = reservadaentero + id + reservadaigual + numero + reservadapuntocoma
@@ -355,6 +360,12 @@ namespace AnalizadorLexico
             asignacion.Rule = reservadaas + id + reservadaigual + operacion + reservadapuntocoma
                 | reservadaas + id + reservadaigual + numero + reservadapuntocoma;
 
+            asignacionCadena.Rule = reservadaascad + id + reservadaigual + dentroAsignacionCadena + reservadapuntocoma;
+
+            dentroAsignacionCadena.Rule = cualquier + reservadamas + dentroAsignacionCadena
+                | id + reservadamas + dentroAsignacionCadena
+                | cualquier
+                | id;
 
             acceso.Rule = Empty
                 | reservadapublico

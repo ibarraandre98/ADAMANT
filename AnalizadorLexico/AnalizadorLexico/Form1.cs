@@ -533,42 +533,12 @@ namespace AnalizadorLexico
                                         if (primerif != 0)
                                         {
                                             cadenaOperacion += itemTodo.ToString().Split(' ').ElementAt(0);
-                                            //Va a checar si es el mismo tipo de dato
-                                            //cadenaOperacion += itemTodo.ToString().Split(' ').ElementAt(1);
-                                            //if (tipoDeclaracion.Equals("id"))
-                                            //{
-                                            //    foreach (DataGridViewRow itemdeclaracion in dtgSemantico.Rows)
-                                            //    {
-                                            //        if(itemTodo.ToString().Split(' ').ElementAt(0).Equals(itemdeclaracion.Cells["Variable"].Value.ToString()))
-                                            //        {
-                                            //            if (variableasignacion.Equals(itemdeclaracion.Cells["TipoDeDato"].Value.ToString()))
-                                            //            {
-                                            //                tipoIgual = true;
-                                            //            }
-                                            //            else
-                                            //            {
-                                            //                tipoIgual = false;
-                                            //                MessageBox.Show("Es distinto el tipo de dato");
-                                            //                break;
-                                            //            }
-                                            //        }
-                                            //    }
-                                            //}
                                         }
                                         else
                                         {
                                             variableasignacion = itemTodo.ToString().Split(' ').ElementAt(0);
                                         }
                                         primerif++;
-                                        //MessageBox.Show("#" + con.ToString()
-                                        //+ " *ITEM: " + itemTodo.ToString()
-                                        //+ " *associativity: " + itemTodo.Associativity.ToString()
-                                        //+ " *Span End position: " + itemTodo.Span.EndPosition
-                                        //+ " *Span Length: " + itemTodo.Span.Length
-                                        //+ " *Span : Location" + itemTodo.Span.Location
-                                        //+ " *Term: " + itemTodo.Term.ToString()
-                                        //+ " *TermErrorAlias: " + itemTodo.Term.ErrorAlias
-                                        //+ " *itemtermName: " + itemTodo.Term.Name);
                                     }
 
                                 }
@@ -597,6 +567,62 @@ namespace AnalizadorLexico
                                 }
                             }
                             cadenaOperacion = null;
+                        }
+
+                        else if (item.Term.Name.Equals("asignacionCadena"))
+                        {
+                            String valor = null;
+                            menor = item.Span.EndPosition - item.Span.Length;
+                            mayor = item.Span.EndPosition;
+                            bool entro = false;
+                            foreach (var item1 in nodos)
+                            {
+                                if (item1.Span.EndPosition <= mayor
+                                    && item1.Span.EndPosition - item1.Span.Length >= menor)
+                                {
+                                    if (item1.Term.Name.Equals("id") && entro == false)
+                                    {
+                                        variableasignacion = item1.ToString().Split(' ').ElementAt(0);
+                                    }
+                                    if (item1.Term.Name.Equals("="))
+                                    {
+                                        entro = true;
+                                        //menor = item1.Span.EndPosition - item1.Span.Length;
+                                    }
+                                    if(item1.Term.Name.Equals("cualquier") && entro == true)
+                                    {
+                                        valor += item1.ToString().Split('"').ElementAt(1);
+                                    }
+                                    if (item1.Term.Name.Equals("id") && entro == true)
+                                    {
+                                        foreach (DataGridViewRow valorId in dtgSemantico.Rows)
+                                        {
+                                            if(item1.ToString().Split(' ').ElementAt(0).Equals(valorId.Cells["Variable"].Value)
+                                                && valorId.Cells["Tipo"].Value.Equals("Declaracion") 
+                                                && valorId.Cells["TipoDeDato"].Value.Equals("cadena"))
+                                            {
+                                                valor += valorId.Cells["Valor"].Value;
+                                            }else if ((item1.ToString().Split(' ').ElementAt(0).Equals(valorId.Cells["Variable"].Value)
+                                                && valorId.Cells["Tipo"].Value.Equals("Declaracion")
+                                                && !valorId.Cells["TipoDeDato"].Value.Equals("cadena")))
+                                            {
+                                                resultado = false;
+                                                tbConsola.Text = "Error no se puede concatenar un entero con una cadena";
+                                                return;
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                            foreach (DataGridViewRow itemTablaSimbolos in dtgSemantico.Rows)
+                            {
+                                if (variableasignacion.Equals(itemTablaSimbolos.Cells["Variable"].Value)
+                                    && itemTablaSimbolos.Cells["Tipo"].Value.Equals("Declaracion"))
+                                {
+                                    itemTablaSimbolos.Cells["Valor"].Value = valor;
+                                }
+                            }
                         }
                     }
                     //Impresion de valor de variables
