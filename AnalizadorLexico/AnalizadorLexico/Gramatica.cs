@@ -161,7 +161,7 @@ namespace AnalizadorLexico
             NonTerminal clase = new NonTerminal("Clase");
             NonTerminal acceso = new NonTerminal("Acceso");
             NonTerminal voidmain = new NonTerminal("Voidmain");
-            NonTerminal condicional = new NonTerminal("Condicional");
+            NonTerminal condicional = new NonTerminal("condicional");
             NonTerminal dentrovoid = new NonTerminal("dentrovoid");
             NonTerminal operadores = new NonTerminal("operadores");
             NonTerminal tipodedatonumerico = new NonTerminal("tipodedatonumerico");

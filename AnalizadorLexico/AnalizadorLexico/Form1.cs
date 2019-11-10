@@ -181,7 +181,7 @@ namespace AnalizadorLexico
             pictureBox1.Refresh();
         }
 
-       
+
 
         private void btnmini_Click(object sender, EventArgs e)
         {
@@ -309,25 +309,7 @@ namespace AnalizadorLexico
                 int menor = 0, mayor = 0;
                 foreach (var item in nodos)
                 {
-                //MessageBox.Show("#" + con.ToString()
-                //+ " *ITEM: " + item.ToString()
-                //+ " *associativity: " + item.Associativity.ToString()
-                //+ " *Span End position: " + item.Span.EndPosition
-                //+ " *Span Length: " + item.Span.Length
-                //+ " *Span : Location" + item.Span.Location
-                //+ " *Term: " + item.Term.ToString()
-                //+ " *TermErrorAlias: " + item.Term.ErrorAlias
-                //+ " *itemtermName: " + item.Term.Name);
-
-
-                if (item.Term.Name.Equals("Declaracion"))
-                    {
-                        String tipodedato = null, variable = null, valor = null;
-                        menor = item.Span.EndPosition - item.Span.Length;
-                        mayor = item.Span.EndPosition;
-
-
-                    //    MessageBox.Show("#" + con.ToString()
+                    //MessageBox.Show("#" + con.ToString()
                     //+ " *ITEM: " + item.ToString()
                     //+ " *associativity: " + item.Associativity.ToString()
                     //+ " *Span End position: " + item.Span.EndPosition
@@ -335,20 +317,38 @@ namespace AnalizadorLexico
                     //+ " *Span : Location" + item.Span.Location
                     //+ " *Term: " + item.Term.ToString()
                     //+ " *TermErrorAlias: " + item.Term.ErrorAlias
-                    //+ " *item.Term.Name: " + item.Term.Name);
+                    //+ " *itemtermName: " + item.Term.Name);
+
+
+                    if (item.Term.Name.Equals("Declaracion"))
+                    {
+                        String tipodedato = null, variable = null, valor = null;
+                        menor = item.Span.EndPosition - item.Span.Length;
+                        mayor = item.Span.EndPosition;
+
+
+                        //    MessageBox.Show("#" + con.ToString()
+                        //+ " *ITEM: " + item.ToString()
+                        //+ " *associativity: " + item.Associativity.ToString()
+                        //+ " *Span End position: " + item.Span.EndPosition
+                        //+ " *Span Length: " + item.Span.Length
+                        //+ " *Span : Location" + item.Span.Location
+                        //+ " *Term: " + item.Term.ToString()
+                        //+ " *TermErrorAlias: " + item.Term.ErrorAlias
+                        //+ " *item.Term.Name: " + item.Term.Name);
                         //
                         #region Agregado de variables declaradas
                         foreach (var item1 in nodos)
                         {
 
-                            if ((item1.Term.Name.Equals("tipodedato") 
-                                || item1.Term.Name.Equals("id") 
-                                || item1.Term.Name.Equals("numero") 
-                                || item1.Term.Name.Equals("numero-decimal") 
-                                || item1.Term.Name.Equals("cualquier") 
+                            if ((item1.Term.Name.Equals("tipodedato")
+                                || item1.Term.Name.Equals("id")
+                                || item1.Term.Name.Equals("numero")
+                                || item1.Term.Name.Equals("numero-decimal")
+                                || item1.Term.Name.Equals("cualquier")
                                 || item1.Term.Name.Equals("cualquiercar")
-                                || item1.Term.Name.Equals("<>in")) 
-                                && (item1.Span.EndPosition <= mayor 
+                                || item1.Term.Name.Equals("<>in"))
+                                && (item1.Span.EndPosition <= mayor
                                 && (item1.Span.EndPosition - item1.Span.Length) >= menor))
                             {
                                 if (item1.Term.Name.Equals("tipodedato"))
@@ -361,17 +361,18 @@ namespace AnalizadorLexico
                                     variable = item1.ToString().Split(' ').ElementAt(0);
                                     //MessageBox.Show(variable);
                                 }
-                                if (item1.Term.Name.Equals("numero") 
+                                if (item1.Term.Name.Equals("numero")
                                     || item1.Term.Name.Equals("numero-decimal")
-                                    || item1.Term.Name.Equals("cualquier") 
-                                    || item1.Term.Name.Equals("cualquiercar") 
+                                    || item1.Term.Name.Equals("cualquier")
+                                    || item1.Term.Name.Equals("cualquiercar")
                                     || item1.Term.Name.Equals("tipodedato"))
                                 {
                                     if (item1.Term.Name.Equals("tipodedato"))
                                     {
                                         valor = null;
                                         //MessageBox.Show(item1.ToString() + "muski");
-                                    }else if (item1.Term.Name.Equals("cualquier"))
+                                    }
+                                    else if (item1.Term.Name.Equals("cualquier"))
                                     {
                                         valor = item1.ToString().Split('"').ElementAt(1);
                                     }
@@ -383,17 +384,17 @@ namespace AnalizadorLexico
                                 }
                                 if (item1.Term.Name.Equals("<>in"))
                                 {
-                                    valor = Interaction.InputBox("Leer por teclado","Ingrese el valor de "+valor,"0");
+                                    valor = Interaction.InputBox("Leer por teclado", "Ingrese el valor de " + valor, "0");
                                 }
-                            //    MessageBox.Show("#" + con.ToString()
-                            //+ " *ITEM: " + item1.ToString()
-                            //+ " *associativity: " + item1.Associativity.ToString()
-                            //+ " *Span End position: " + item1.Span.EndPosition
-                            //+ " *Span Length: " + item1.Span.Length
-                            //+ " *Span : Location" + item1.Span.Location
-                            //+ " *Term: " + item1.Term.ToString()
-                            //+ " *TermErrorAlias: " + item1.Term.ErrorAlias
-                            //+ " *itemtermName: " + item1.Term.Name);
+                                //    MessageBox.Show("#" + con.ToString()
+                                //+ " *ITEM: " + item1.ToString()
+                                //+ " *associativity: " + item1.Associativity.ToString()
+                                //+ " *Span End position: " + item1.Span.EndPosition
+                                //+ " *Span Length: " + item1.Span.Length
+                                //+ " *Span : Location" + item1.Span.Location
+                                //+ " *Term: " + item1.Term.ToString()
+                                //+ " *TermErrorAlias: " + item1.Term.ErrorAlias
+                                //+ " *itemtermName: " + item1.Term.Name);
                             }
                         }
                         #endregion
@@ -490,8 +491,8 @@ namespace AnalizadorLexico
                     con = 0;
 
                     //Dar valor a las variables de asignación de variables
-                    int mayorope = 0,menorope = 0;
-                    String cadenaOperacion = null, recorridoope = null,variableasignacion = null, tipoDeclaracion = null;
+                    int mayorope = 0, menorope = 0;
+                    String cadenaOperacion = null, recorridoope = null, variableasignacion = null, tipoDeclaracion = null;
                     Boolean tipoIgual;
                     int vueltas = 0;
                     foreach (var item in nodos)
@@ -572,7 +573,7 @@ namespace AnalizadorLexico
 
                                 }
                             }
-                       
+
                             String car, car2;
                             foreach (DataGridViewRow itemOpe in dtgSemantico.Rows)
                             {
@@ -583,19 +584,19 @@ namespace AnalizadorLexico
                                     cadenaOperacion = cadenaOperacion.Replace(car, car2);
                                 }
                             }
-                        //MessageBox.Show(cadenaOperacion);
-                        ParseTreeNode resultadoOpe = Sintactico.operaciones(cadenaOperacion);
-                        recorridoope = RecorridoOperacion.resolverOperacion(resultadoOpe);
+                            //MessageBox.Show(cadenaOperacion);
+                            ParseTreeNode resultadoOpe = Sintactico.operaciones(cadenaOperacion);
+                            recorridoope = RecorridoOperacion.resolverOperacion(resultadoOpe);
                             //MessageBox.Show(recorridoope);
                             foreach (DataGridViewRow itemTablaSimbolos in dtgSemantico.Rows)
-                        {
-                            if (variableasignacion.Equals(itemTablaSimbolos.Cells["Variable"].Value)
-                                && itemTablaSimbolos.Cells["Tipo"].Value.Equals("Declaracion"))
                             {
-                                itemTablaSimbolos.Cells["Valor"].Value = recorridoope;
+                                if (variableasignacion.Equals(itemTablaSimbolos.Cells["Variable"].Value)
+                                    && itemTablaSimbolos.Cells["Tipo"].Value.Equals("Declaracion"))
+                                {
+                                    itemTablaSimbolos.Cells["Valor"].Value = recorridoope;
+                                }
                             }
-                        }
-                        cadenaOperacion = null;
+                            cadenaOperacion = null;
                         }
                     }
                     //Impresion de valor de variables
@@ -614,21 +615,21 @@ namespace AnalizadorLexico
 
                         if (item.Term.Name.Equals("impresion"))
                         {
-                            
+
                             menor = item.Span.EndPosition - item.Span.Length;
                             mayor = item.Span.EndPosition;
                             //MessageBox.Show(menor+" "+ mayor);
                             foreach (var item1 in nodos)
                             {
-                                if((item1.Term.Name.Equals("id"))
+                                if ((item1.Term.Name.Equals("id"))
                                 && (item1.Span.EndPosition <= mayor
                                 && (item1.Span.EndPosition - item1.Span.Length) >= menor))
                                 {
                                     foreach (DataGridViewRow itemTablaSimbolos in dtgSemantico.Rows)
                                     {
-                                        if(item1.ToString().Split(' ').ElementAt(0).Equals(itemTablaSimbolos.Cells["Variable"].Value))
+                                        if (item1.ToString().Split(' ').ElementAt(0).Equals(itemTablaSimbolos.Cells["Variable"].Value))
                                         {
-                                            if(itemTablaSimbolos.Cells["Valor"].Value == null)
+                                            if (itemTablaSimbolos.Cells["Valor"].Value == null)
                                             {
                                                 tbConsola.Text += (itemTablaSimbolos.Cells["Variable"].Value + " Variable sin valor asignado") + Environment.NewLine;
                                             }
@@ -638,18 +639,41 @@ namespace AnalizadorLexico
                                             }
                                         }
                                     }
-                                }else if((item1.Term.Name.Equals("cualquier"))
-                                    && (item1.Span.EndPosition <= mayor
-                                    && (item1.Span.EndPosition - item1.Span.Length) >= menor))
+                                }
+                                else if ((item1.Term.Name.Equals("cualquier"))
+                                   && (item1.Span.EndPosition <= mayor
+                                   && (item1.Span.EndPosition - item1.Span.Length) >= menor))
                                 {
                                     tbConsola.Text += (item1.ToString().Split('"').ElementAt(1)) + Environment.NewLine;
-                                }else if ((item1.Term.Name.Equals("numero")|| (item1.Term.Name.Equals("numero-decimal")))
-                                    && (item1.Span.EndPosition <= mayor
-                                    && (item1.Span.EndPosition - item1.Span.Length) >= menor))
+                                }
+                                else if ((item1.Term.Name.Equals("numero") || (item1.Term.Name.Equals("numero-decimal")))
+                                   && (item1.Span.EndPosition <= mayor
+                                   && (item1.Span.EndPosition - item1.Span.Length) >= menor))
                                 {
                                     tbConsola.Text += (item1.ToString().Split(' ').ElementAt(0)) + Environment.NewLine;
                                 }
-   
+
+                            }
+                        }
+                        if (item.Term.Name.Equals("condicional"))
+                        {
+                            menor = item.Span.EndPosition - item.Span.Length;
+                            mayor = item.Span.EndPosition;
+                            foreach (var item1 in nodos)
+                            {
+                                if ((item1.Span.EndPosition <= mayor
+                                && (item1.Span.EndPosition - item1.Span.Length) >= menor))
+                                {
+                                    MessageBox.Show("#" + con.ToString()
+                                                    + " *ITEM: " + item1.ToString()
+                                                    + " *associativity: " + item1.Associativity.ToString()
+                                                    + " *Span End position: " + item1.Span.EndPosition
+                                                    + " *Span Length: " + item1.Span.Length
+                                                    + " *Span : Location" + item1.Span.Location
+                                                    + " *Term: " + item1.Term.ToString()
+                                                    + " *TermErrorAlias: " + item1.Term.ErrorAlias
+                                                    + " *itemtermName: " + item1.Term.Name);
+                                }
                             }
                         }
                     }
@@ -660,16 +684,16 @@ namespace AnalizadorLexico
 
                 ts.Clear();
                 LlenadoTablaSimbolos();
-        }
-            catch(NullReferenceException ex)
-            {
-                MessageBox.Show("Excepción "+ex.Message);
             }
-            catch(Exception ex)
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Excepción " + ex.Message);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-}
+        }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -718,13 +742,13 @@ namespace AnalizadorLexico
             }
         }
 
-        
 
-        
+
+
 
         private void btnInfo_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("ADAMANT $\nCreado por: André Ibarra Pérez","Información",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show("ADAMANT $\nCreado por: André Ibarra Pérez", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         int posX = 0;
         int posY = 0;
