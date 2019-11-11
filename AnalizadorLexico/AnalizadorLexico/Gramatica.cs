@@ -272,6 +272,7 @@ namespace AnalizadorLexico
                 | reservadaentero + id + reservadaigual + reservadaain + reservadapuntocoma
                 | reservadalargo + id + reservadaigual + reservadaain + reservadapuntocoma
                 | reservadadoble + id + reservadaigual + reservadaain + reservadapuntocoma
+                | reservadaflotante + id + reservadaigual + reservadaain + reservadapuntocoma
                 | reservadacadena + id + reservadaigual + reservadaain + reservadapuntocoma
                 | reservadacaracter + id + reservadaigual + reservadaain + reservadapuntocoma
                 | reservadaentero + id + reservadapuntocoma

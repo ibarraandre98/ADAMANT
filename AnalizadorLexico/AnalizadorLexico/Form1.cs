@@ -297,7 +297,7 @@ namespace AnalizadorLexico
             {
                 limpiar();
                 if (textoCodigo.TextLength == 0)
-                    MessageBox.Show("No se puede compilar esta vacío");
+                    MessageBox.Show("No se puede compilar esta vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else if (load == true)
                     AnalizeCode();
                 bool resultado = Sintactico.analizar(textoCodigo.Text);
@@ -382,9 +382,42 @@ namespace AnalizadorLexico
                                         //MessageBox.Show(item1.ToString() + "muski");
                                     }
                                 }
-                                if (item1.Term.Name.Equals("<>in"))
+                                if (item1.Term.Name.Equals("<>in") && tipodedato.Equals("entero"))
                                 {
-                                    valor = Interaction.InputBox("Leer por teclado", "Ingrese el valor de " + valor, "0");
+                                    int ejem = 0;
+                                    valor = Interaction.InputBox("Leer por teclado", "Ingrese el valor de \"" + variable + "\" que es de tipo " + tipodedato, "0");
+                                    if (!int.TryParse(valor, out ejem))
+                                    {
+                                        tbConsola.Text += "Error la variable es de tipo entero, no puede asignar un valor distinto a este";
+                                        MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+                                }
+                                else if (item1.Term.Name.Equals("<>in") && tipodedato.Equals("doble"))
+                                {
+                                    double ejem = 0;
+                                    valor = Interaction.InputBox("Leer por teclado", "Ingrese el valor de \"" + variable + "\" que es de tipo " + tipodedato, "0");
+                                    if (!double.TryParse(valor, out ejem))
+                                    {
+                                        tbConsola.Text += "Error la variable es de tipo doble, no puede asignar un valor distinto a este";
+                                        MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+                                }
+                                else if (item1.Term.Name.Equals("<>in") && tipodedato.Equals("flotante"))
+                                {
+                                    float ejem = 0;
+                                    valor = Interaction.InputBox("Leer por teclado", "Ingrese el valor de \"" + variable + "\" que es de tipo " + tipodedato, "0");
+                                    if (!float.TryParse(valor, out ejem))
+                                    {
+                                        tbConsola.Text += "Error la variable es de tipo flotante, no puede asignar un valor distinto a este";
+                                        MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                    }
+                                }
+                                else if (item1.Term.Name.Equals("<>in") && tipodedato.Equals("cadena"))
+                                {
+                                    valor = Interaction.InputBox("Leer por teclado", "Ingrese el valor de \"" + variable + "\" que es de tipo " + tipodedato, "");
                                 }
                                 //    MessageBox.Show("#" + con.ToString()
                                 //+ " *ITEM: " + item1.ToString()
@@ -514,36 +547,59 @@ namespace AnalizadorLexico
                             menor = item.Span.EndPosition - item.Span.Length;
                             mayor = item.Span.EndPosition;
                             //MessageBox.Show(menor+" "+ mayor);
+                            String tipoVariableAsignacion = null, tipoOtrasId = null, otrasId = null;
                             foreach (var itemTodo in nodos)
                             {
+
                                 if (itemTodo.Span.EndPosition <= mayor
                                     && itemTodo.Span.EndPosition - itemTodo.Span.Length >= menor)
                                 {
-                                    if (itemTodo.Term.Name.Equals("dentrovoid")
-                                        || itemTodo.Term.Name.Equals("asignacion")
-                                        || itemTodo.Term.Name.Equals("asign")
-                                        || itemTodo.Term.Name.Equals("=")
-                                        || itemTodo.Term.Name.Equals("operacion")
-                                        || itemTodo.Term.Name.Equals(";"))
-                                    {
-
-                                    }
-                                    else
+                                    if (itemTodo.Term.Name.Equals("id")
+                                        || itemTodo.Term.Name.Equals("numero")
+                                        || itemTodo.Term.Name.Equals("numero-decimal")
+                                        || itemTodo.Term.Name.Equals("+")
+                                        || itemTodo.Term.Name.Equals("-")
+                                        || itemTodo.Term.Name.Equals("*")
+                                        || itemTodo.Term.Name.Equals("/")
+                                        || itemTodo.Term.Name.Equals("^")
+                                        || itemTodo.Term.Name.Equals("√"))
                                     {
                                         if (primerif != 0)
                                         {
-                                            cadenaOperacion += itemTodo.ToString().Split(' ').ElementAt(0);
+                                            otrasId = itemTodo.ToString().Split(' ').ElementAt(0);
+                                            cadenaOperacion += otrasId;
+                                            if (itemTodo.Term.Name.Equals("id"))
+                                            {
+                                                foreach (DataGridViewRow variablesId in dtgSemantico.Rows)
+                                                {
+                                                    if (otrasId.Equals(variablesId.Cells["Variable"].Value))
+                                                    {
+                                                        tipoOtrasId = variablesId.Cells["TipoDeDato"].Value.ToString();
+                                                        if (!tipoVariableAsignacion.Equals(tipoOtrasId))
+                                                        {
+                                                            tbConsola.Text += "Error en las asignaciones los tipo de dato no pueden ser distintos";
+                                                            MessageBox.Show("Error de compilación", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                            return;
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                         else
                                         {
                                             variableasignacion = itemTodo.ToString().Split(' ').ElementAt(0);
+                                            foreach (DataGridViewRow variableAsign in dtgSemantico.Rows)
+                                            {
+                                                if (variableasignacion.Equals(variableAsign.Cells["Variable"].Value))
+                                                {
+                                                    tipoVariableAsignacion = variableAsign.Cells["TipoDeDato"].Value.ToString();
+                                                }
+                                            }
                                         }
                                         primerif++;
                                     }
-
                                 }
                             }
-
                             String car, car2;
                             foreach (DataGridViewRow itemOpe in dtgSemantico.Rows)
                             {
@@ -589,7 +645,7 @@ namespace AnalizadorLexico
                                         entro = true;
                                         //menor = item1.Span.EndPosition - item1.Span.Length;
                                     }
-                                    if(item1.Term.Name.Equals("cualquier") && entro == true)
+                                    if (item1.Term.Name.Equals("cualquier") && entro == true)
                                     {
                                         valor += item1.ToString().Split('"').ElementAt(1);
                                     }
@@ -597,21 +653,23 @@ namespace AnalizadorLexico
                                     {
                                         foreach (DataGridViewRow valorId in dtgSemantico.Rows)
                                         {
-                                            if(item1.ToString().Split(' ').ElementAt(0).Equals(valorId.Cells["Variable"].Value)
-                                                && valorId.Cells["Tipo"].Value.Equals("Declaracion") 
+                                            if (item1.ToString().Split(' ').ElementAt(0).Equals(valorId.Cells["Variable"].Value)
+                                                && valorId.Cells["Tipo"].Value.Equals("Declaracion")
                                                 && valorId.Cells["TipoDeDato"].Value.Equals("cadena"))
                                             {
                                                 valor += valorId.Cells["Valor"].Value;
-                                            }else if ((item1.ToString().Split(' ').ElementAt(0).Equals(valorId.Cells["Variable"].Value)
-                                                && valorId.Cells["Tipo"].Value.Equals("Declaracion")
-                                                && !valorId.Cells["TipoDeDato"].Value.Equals("cadena")))
+                                            }
+                                            else if ((item1.ToString().Split(' ').ElementAt(0).Equals(valorId.Cells["Variable"].Value)
+                                               && valorId.Cells["Tipo"].Value.Equals("Declaracion")
+                                               && !valorId.Cells["TipoDeDato"].Value.Equals("cadena")))
                                             {
                                                 resultado = false;
                                                 tbConsola.Text = "Error no se puede concatenar un entero con una cadena";
+                                                MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                                 return;
                                             }
                                         }
-                                        
+
                                     }
                                 }
                             }
@@ -746,18 +804,18 @@ namespace AnalizadorLexico
                     //String a = Interaction.InputBox("Ingrese valor","Input","",-1,-1);
                     tbConsola.Text += ("Compilación correcta") + Environment.NewLine;
                 }
-                else MessageBox.Show("Error de compilación");
+                else MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 ts.Clear();
                 LlenadoTablaSimbolos();
             }
             catch (NullReferenceException ex)
             {
-                MessageBox.Show("Excepción " + ex.Message);
+                MessageBox.Show("Excepción " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
