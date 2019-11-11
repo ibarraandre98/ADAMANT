@@ -151,6 +151,7 @@ namespace AnalizadorLexico
             var reservadaas = ToTerm("asign");
             var reservadaain = ToTerm("<>in");
             var reservadaascad = ToTerm("asignC");
+            var reservadacoma = ToTerm(",");
 
             #endregion
             #region No Terminales
@@ -187,6 +188,11 @@ namespace AnalizadorLexico
             NonTerminal dentroImpresion = new NonTerminal("dentroImpresion");
             NonTerminal asignacionCadena = new NonTerminal("asignacionCadena");
             NonTerminal dentroAsignacionCadena = new NonTerminal("dentroAsignacionCadena");
+            NonTerminal dentroDeclaracionEntero = new NonTerminal("dentroDeclaracionEntero");
+            NonTerminal dentroDeclaracionDoble = new NonTerminal("dentroDeclaracionDoble");
+            NonTerminal dentroDeclaracionFlotante = new NonTerminal("dentroDeclaracionFlotante");
+            NonTerminal dentroDeclaracionCadena = new NonTerminal("dentroDeclaracionCadena");
+            NonTerminal dentroDeclaracionCaracter = new NonTerminal("dentroDeclaracionCaracter");
 
             //NonTerminal palabrasreservadas = new NonTerminal("palabrasreservadas");
             NonTerminal raiz = new NonTerminal("raiz");
@@ -252,29 +258,29 @@ namespace AnalizadorLexico
                 | asignacionCadena
                 | Empty;
 
-            declaracion.Rule = reservadaentero + id + reservadaigual + numero + reservadapuntocoma
+            declaracion.Rule = reservadaentero + dentroDeclaracionEntero + reservadapuntocoma
                 | reservadalargo + id + reservadaigual + numero + reservadapuntocoma
-                | reservadaflotante + id + reservadaigual + numerodecimal + reservadapuntocoma
-                | reservadadoble + id + reservadaigual + numerodecimal + reservadapuntocoma
+                | reservadaflotante + dentroDeclaracionDoble + reservadapuntocoma
+                | reservadadoble + dentroDeclaracionDoble+ reservadapuntocoma
                 | reservadabooleano + id + reservadaigual + reservadaverdadero + reservadapuntocoma
                 | reservadabooleano + id + reservadaigual + reservadafalso + reservadapuntocoma
-                | reservadacadena + id + reservadaigual + cualquier + reservadapuntocoma
-                | reservadacaracter + id + reservadaigual + cualquiercar + reservadapuntocoma
-                | reservadavariable + id + reservadaigual + numero + reservadapuntocoma
-                | reservadavariable + id + reservadaigual + numero + reservadapuntocoma
-                | reservadavariable + id + reservadaigual + numerodecimal + reservadapuntocoma
-                | reservadavariable + id + reservadaigual + numerodecimal + reservadapuntocoma
-                | reservadavariable + id + reservadaigual + reservadaverdadero + reservadapuntocoma
-                | reservadavariable + id + reservadaigual + reservadafalso + reservadapuntocoma
-                | reservadavariable + id + reservadaigual + cualquier + reservadapuntocoma
-                | reservadavariable + id + reservadaigual + cualquiercar + reservadapuntocoma
-                | reservadavariable + id + reservadaigual + reservadaain + reservadapuntocoma
-                | reservadaentero + id + reservadaigual + reservadaain + reservadapuntocoma
-                | reservadalargo + id + reservadaigual + reservadaain + reservadapuntocoma
-                | reservadadoble + id + reservadaigual + reservadaain + reservadapuntocoma
-                | reservadaflotante + id + reservadaigual + reservadaain + reservadapuntocoma
-                | reservadacadena + id + reservadaigual + reservadaain + reservadapuntocoma
-                | reservadacaracter + id + reservadaigual + reservadaain + reservadapuntocoma
+                | reservadacadena + dentroDeclaracionCadena + reservadapuntocoma
+                | reservadacaracter + dentroDeclaracionCaracter + reservadapuntocoma
+                //| reservadavariable + id + reservadaigual + numero + reservadapuntocoma
+                //| reservadavariable + id + reservadaigual + numero + reservadapuntocoma
+                //| reservadavariable + id + reservadaigual + numerodecimal + reservadapuntocoma
+                //| reservadavariable + id + reservadaigual + numerodecimal + reservadapuntocoma
+                //| reservadavariable + id + reservadaigual + reservadaverdadero + reservadapuntocoma
+                //| reservadavariable + id + reservadaigual + reservadafalso + reservadapuntocoma
+                //| reservadavariable + id + reservadaigual + cualquier + reservadapuntocoma
+                //| reservadavariable + id + reservadaigual + cualquiercar + reservadapuntocoma
+                //| reservadavariable + id + reservadaigual + reservadaain + reservadapuntocoma
+                //| reservadaentero + id + reservadaigual + reservadaain + reservadapuntocoma
+                //| reservadalargo + id + reservadaigual + reservadaain + reservadapuntocoma
+                //| reservadadoble + id + reservadaigual + reservadaain + reservadapuntocoma
+                //| reservadaflotante + id + reservadaigual + reservadaain + reservadapuntocoma
+                //| reservadacadena + id + reservadaigual + reservadaain + reservadapuntocoma
+                //| reservadacaracter + id + reservadaigual + reservadaain + reservadapuntocoma
                 | reservadaentero + id + reservadapuntocoma
                 | reservadalargo + id + reservadapuntocoma
                 | reservadaflotante + id + reservadapuntocoma
@@ -283,6 +289,34 @@ namespace AnalizadorLexico
                 | reservadacadena + id + reservadapuntocoma
                 | reservadacaracter + id + reservadapuntocoma
                 | reservadavariable + id + reservadapuntocoma;
+
+            dentroDeclaracionEntero.Rule = id + reservadaigual + numero
+                | id + reservadaigual + reservadaain
+                | reservadacoma + dentroDeclaracionEntero
+                | id + reservadaigual + numero + dentroDeclaracionEntero
+                | id + reservadaigual + reservadaain + dentroDeclaracionEntero
+                ;
+
+            dentroDeclaracionDoble.Rule = id + reservadaigual + numerodecimal
+                | id + reservadaigual + reservadaain
+                | reservadacoma + dentroDeclaracionDoble
+                | id + reservadaigual + numerodecimal + dentroDeclaracionDoble
+                | id + reservadaigual + reservadaain + dentroDeclaracionDoble
+                ;
+
+            dentroDeclaracionCadena.Rule = id + reservadaigual + cualquier
+                | id + reservadaigual + reservadaain
+                | reservadacoma + dentroDeclaracionCadena
+                | id + reservadaigual + cualquier + dentroDeclaracionCadena
+                | id + reservadaigual + reservadaain + dentroDeclaracionCadena
+                ;
+
+            dentroDeclaracionCaracter.Rule = id + reservadaigual + cualquiercar
+                | id + reservadaigual + reservadaain
+                | reservadacoma + dentroDeclaracionCaracter
+                | id + reservadaigual + cualquiercar + dentroDeclaracionCaracter
+                | id + reservadaigual + reservadaain + dentroDeclaracionCaracter
+                ;
 
             condicional.Rule = condicionalsi
                 |condicionalsi + condicionalsino;

@@ -325,7 +325,7 @@ namespace AnalizadorLexico
                         String tipodedato = null, variable = null, valor = null;
                         menor = item.Span.EndPosition - item.Span.Length;
                         mayor = item.Span.EndPosition;
-
+                        int totalDeclaradas = 0, priTLD = 3;
 
                         //    MessageBox.Show("#" + con.ToString()
                         //+ " *ITEM: " + item.ToString()
@@ -419,6 +419,40 @@ namespace AnalizadorLexico
                                 {
                                     valor = Interaction.InputBox("Leer por teclado", "Ingrese el valor de \"" + variable + "\" que es de tipo " + tipodedato, "");
                                 }
+                                totalDeclaradas++;
+
+                                if(totalDeclaradas == priTLD)
+                                {
+                                    #region Detecta si ya hay una variable declarada
+                                    Boolean declarada = false;
+                                    foreach (var itemTablaSimbolos in ts)
+                                    {
+                                        if (variable.Equals(itemTablaSimbolos.variable) && itemTablaSimbolos.tipo.Equals("Declaracion"))
+                                        {
+                                            declarada = true;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            declarada = false;
+                                        }
+                                    }
+                                    if (declarada == true)
+                                    {
+                                        resultado = false;
+                                        tbConsola.SelectionStart = tbConsola.TextLength;
+                                        tbConsola.SelectionLength = 0;
+                                        tbConsola.SelectionColor = Color.Red;
+                                        tbConsola.Text += ("Error está declarando dos o mas veces la variable \"" + variable + "\", ya se encuentra declarada") + Environment.NewLine;
+                                    }
+                                    else
+                                    {
+                                        ts.Add(new TablaSimbolos("Declaracion", tipodedato, variable, valor));
+                                    }
+                                    priTLD = 2;
+                                    totalDeclaradas = 0;
+                                    #endregion
+                                }
                                 //    MessageBox.Show("#" + con.ToString()
                                 //+ " *ITEM: " + item1.ToString()
                                 //+ " *associativity: " + item1.Associativity.ToString()
@@ -432,33 +466,36 @@ namespace AnalizadorLexico
                         }
                         #endregion
                         //
-                        #region Detecta si ya hay una variable declarada
-                        Boolean declarada = false;
-                        foreach (var itemTablaSimbolos in ts)
+                        if(totalDeclaradas == 2)
                         {
-                            if (variable.Equals(itemTablaSimbolos.variable) && itemTablaSimbolos.tipo.Equals("Declaracion"))
+                            #region Detecta si ya hay una variable declarada
+                            Boolean declarada = false;
+                            foreach (var itemTablaSimbolos in ts)
                             {
-                                declarada = true;
-                                break;
+                                if (variable.Equals(itemTablaSimbolos.variable) && itemTablaSimbolos.tipo.Equals("Declaracion"))
+                                {
+                                    declarada = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    declarada = false;
+                                }
+                            }
+                            if (declarada == true)
+                            {
+                                resultado = false;
+                                tbConsola.SelectionStart = tbConsola.TextLength;
+                                tbConsola.SelectionLength = 0;
+                                tbConsola.SelectionColor = Color.Red;
+                                tbConsola.Text += ("Error está declarando dos o mas veces la variable \"" + variable + "\", ya se encuentra declarada") + Environment.NewLine;
                             }
                             else
                             {
-                                declarada = false;
+                                ts.Add(new TablaSimbolos("Declaracion", tipodedato, variable, valor));
                             }
+                            #endregion
                         }
-                        if (declarada == true)
-                        {
-                            resultado = false;
-                            tbConsola.SelectionStart = tbConsola.TextLength;
-                            tbConsola.SelectionLength = 0;
-                            tbConsola.SelectionColor = Color.Red;
-                            tbConsola.Text += ("Error está declarando dos o mas veces la variable \"" + variable + "\", ya se encuentra declarada") + Environment.NewLine;
-                        }
-                        else
-                        {
-                            ts.Add(new TablaSimbolos("Declaracion", tipodedato, variable, valor));
-                        }
-                        #endregion
                     }
 
                     //No se ha declarado
