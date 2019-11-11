@@ -1,0 +1,174 @@
+﻿usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	entero a = 8;
+	imprimir("El resultado es: "+ a);
+}
+}
+}
+
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	cadena a = "hola";
+	asignC a = "";
+	imprimir("El resultado es: "+ a);
+}
+}
+}
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	cadena a = "hola";
+	entero b = 8;
+	asignC a = "" + b;
+	imprimir("El resultado es: "+ a);
+}
+}
+}
+
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	entero b = 9;
+	doble h = 9.1;
+	entero g;
+	asign g = b + h;
+	imprimir(g);
+}
+}
+}
+
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	entero b = 9;
+	entero h = 7;
+	entero g;
+	asign g = b + h;
+	imprimir(g);
+}
+}
+}
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	entero a = <>in;
+	imprimir(a);
+}
+}
+}
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	entero a = 8;
+	imprimir(a);
+}
+}
+}
+
+
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	entero a = 8, b =7, c = 0;
+	asign c = a+b;
+	imprimir(c);
+}
+}
+}
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	cadena a = "h", b ="o", c = "l";
+	asign c = a+b;
+	imprimir(c);
+}
+}
+}
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	cadena a = "h", b ="o", c = "l",d = "a",e = "";
+	asignC e = a+b+c+d;
+	imprimir(e);
+}
+}
+}
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	caracter a = 'h', b ='o', c = 'l',d = 'a',e = '';
+	asignC e = a+b+c+d;
+	imprimir(e);
+}
+}
+}
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	entero a = 8, b =<>in, c = 0;
+	asign c = a+b;
+	imprimir(c);
+}
+}
+}
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	entero a = <>in, b =<>in, c = 0;
+	asign c = a+b;
+	imprimir(c);
+}
+}
+}
+
+
+
+usando sistema;
+spacename sistema { 
+publico clase sistema{
+publico estatico vacio principal(cadena[]argumento){
+	cadena a = <>in, b =<>in, c = "";
+	asignC c = a+b;
+	imprimir(c);
+}
+}
+}
+
