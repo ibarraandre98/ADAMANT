@@ -27,7 +27,7 @@ namespace AnalizadorLexico
             cont++;
             panel2.Left = panel2.Left + plus;
 
-            if (panel2.Left > 283)
+            if (panel2.Left > 935)
             {
                 plus = -2;
             }
@@ -35,7 +35,7 @@ namespace AnalizadorLexico
             {
                 plus = 2;
             }
-            if (cont == 50)
+            if (cont >= (935/2))
             {
                 timer1.Stop();
                 Hide();
@@ -49,7 +49,7 @@ namespace AnalizadorLexico
         private void Inicio_Load(object sender, EventArgs e)
         {
             timer1.Tick += new EventHandler(move);
-            timer1.Interval = 1;
+            timer1.Interval = 10;
             timer1.Start();
             
             
@@ -59,6 +59,11 @@ namespace AnalizadorLexico
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
