@@ -304,6 +304,7 @@ namespace AnalizadorLexico
                 int menor = 0, mayor = 0;
                 foreach (var item in nodos)
                 {
+                    #region Imprime los valores del arbol
                     //MessageBox.Show("#" + con.ToString()
                     //+ " *ITEM: " + item.ToString()
                     //+ " *associativity: " + item.Associativity.ToString()
@@ -313,14 +314,15 @@ namespace AnalizadorLexico
                     //+ " *Term: " + item.Term.ToString()
                     //+ " *TermErrorAlias: " + item.Term.ErrorAlias
                     //+ " *itemtermName: " + item.Term.Name);
-
+                    #endregion
+                    #region Agregado de variables declaradas
                     if (item.Term.Name.Equals("Declaracion"))
                     {
                         String tipodedato = null, variable = null, valor = null;
                         menor = item.Span.EndPosition - item.Span.Length;
                         mayor = item.Span.EndPosition;
                         int totalDeclaradas = 0, priTLD = 3;
-                        #region Agregado de variables declaradas
+                        
                         foreach (var item1 in nodos)
                         {
 
@@ -434,8 +436,8 @@ namespace AnalizadorLexico
                                 }
                             }
                         }
-                        #endregion
-                        //
+
+                        #region Si se declara una variable sin valor
                         if (totalDeclaradas == 2)
                         {
                             #region Detecta si ya hay una variable declarada
@@ -466,9 +468,11 @@ namespace AnalizadorLexico
                             }
                             #endregion
                         }
+                        #endregion
                     }
+                    #endregion
 
-                    //No se ha declarado
+                    #region Detecta si no se ha declarado alguna variable
                     if (item.ToString().Contains("(id)"))
                     {
                         String var = item.ToString().Split(' ').ElementAt(0);
@@ -497,8 +501,7 @@ namespace AnalizadorLexico
                         }
 
                     }
-
-                    con++;
+                    #endregion
                 }
                 #region Error semantico no se pueden declarar variables que son palabras reservadas
                 foreach (var item in nodos)
@@ -518,16 +521,17 @@ namespace AnalizadorLexico
                 }
                 #endregion
 
+                #region Añade las variables declaradas al DataGridView desde la lista
                 foreach (var item in ts)
                 {
                     dtgSemantico.Rows.Add(item.tipo, item.tipoDato, item.variable, item.valor);
                 }
+                #endregion
 
+                #region Ejecución asignaciones, operaciones e impresiones
                 if (resultado)
                 {
-                    con = 0;
-
-                    //Dar valor a las variables de asignación de variables
+                    #region Asigna valores a las variables previamente declaradas
                     int mayorope = 0, menorope = 0;
                     String cadenaOperacion = null, recorridoope = null, variableasignacion = null, tipoDeclaracion = null;
                     Boolean tipoIgual;
@@ -535,7 +539,7 @@ namespace AnalizadorLexico
                     foreach (var item in nodos)
                     {
                         con++;
-
+                        #region Asigna valores a las variables con valor numérico
                         if (item.Term.Name.Equals("asignacion"))
                         {
                             int primerif = 0;
@@ -616,7 +620,8 @@ namespace AnalizadorLexico
                             }
                             cadenaOperacion = null;
                         }
-
+                        #endregion
+                        #region Asigna valores a las variables con cualquier tipo de valor
                         else if (item.Term.Name.Equals("asignacionCadena"))
                         {
                             String valor = null;
@@ -673,21 +678,16 @@ namespace AnalizadorLexico
                                 }
                             }
                         }
+                        #endregion
                     }
-                    //Impresion de valor de variables
+
+                    #endregion
+
+
+                    #region Imprime valores de variables, impresiones complejas, numeros etc.
                     foreach (var item in nodos)
                     {
-                        //MessageBox.Show("#" + con.ToString()
-                        //                + " *ITEM: " + item.ToString()
-                        //                + " *associativity: " + item.Associativity.ToString()
-                        //                + " *Span End position: " + item.Span.EndPosition
-                        //                + " *Span Length: " + item.Span.Length
-                        //                + " *Span : Location" + item.Span.Location
-                        //                + " *Term: " + item.Term.ToString()
-                        //                + " *TermErrorAlias: " + item.Term.ErrorAlias
-                        //                + " *itemtermName: " + item.Term.Name);
-                        con++;
-
+                        #region Imprime valores individuales
                         if (item.Term.Name.Equals("impresion"))
                         {
 
@@ -729,6 +729,8 @@ namespace AnalizadorLexico
 
                             }
                         }
+                        #endregion
+                        #region Imprime valores Complejos
                         if (item.Term.Name.Equals("impresionCompleja"))
                         {
                             menor = item.Span.EndPosition - item.Span.Length;
@@ -769,6 +771,8 @@ namespace AnalizadorLexico
                             }
                             tbConsola.Text += Environment.NewLine;
                         }
+                        #endregion
+                        #endregion
                         if (item.Term.Name.Equals("condicional"))
                         {
                             menor = item.Span.EndPosition - item.Span.Length;
@@ -790,6 +794,7 @@ namespace AnalizadorLexico
 
                 ts.Clear();
                 LlenadoTablaSimbolos();
+#endregion
             }
             catch (NullReferenceException ex)
             {
