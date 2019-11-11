@@ -39,8 +39,9 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bunifu_UI_v1.52">
-      <HintPath>..\Bunifu_UI_v1.52.dll</HintPath>
+    <Reference Include="Bunifu_UI_v1.52, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Downloads\Bunifu_UI_v1.52.dll</HintPath>
     </Reference>
     <Reference Include="CircularProgressBar, Version=2.7.0.7, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
       <HintPath>..\packages\CircularProgressBar.2.7.0.7\lib\net40\CircularProgressBar.dll</HintPath>
@@ -102,6 +103,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -120,6 +122,20 @@
   <ItemGroup>
     <Content Include="Ejemplos.txt" />
     <Content Include="icon.ico" />
+    <None Include="Resources\adamantUltimo1.png" />
+    <None Include="Resources\81521304-imagen-de-la-historieta-del-icono-de-diamante-símbolo-de-diamante1.png" />
+    <None Include="Resources\pegar.png" />
+    <None Include="Resources\guardar.png" />
+    <None Include="Resources\borrar.png" />
+    <None Include="Resources\correr.png" />
+    <None Include="Resources\cortar.png" />
+    <None Include="Resources\copiar.png" />
+    <None Include="Resources\abrir.png" />
+    <None Include="Resources\nuevo.png" />
+    <None Include="Resources\Minecraft Shaded Iron Ore Wallpaper By Chrisl21 Apps Directories.jpg" />
+    <None Include="Resources\images %283%29 %282%29.jpg" />
+    <None Include="Resources\81521304-imagen-de-la-historieta-del-icono-de-diamante-símbolo-de-diamante.png" />
+    <None Include="Resources\adamantUltimo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

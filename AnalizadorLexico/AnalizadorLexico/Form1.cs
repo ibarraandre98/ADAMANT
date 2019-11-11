@@ -33,7 +33,7 @@ namespace AnalizadorLexico
         {
             CARACTER = 0; //SE INICIALIZA A 0 EN CADA REPINTADO
             int ALTURA = textoCodigo.GetPositionFromCharIndex(0).Y - 1;//coordenada del primer caracter
-            Color Verde = Color.FromArgb(141, 240, 1);
+            Color Verde = Color.FromArgb(97, 236, 243);
             SolidBrush myBrush = new SolidBrush(Verde);
 
 
