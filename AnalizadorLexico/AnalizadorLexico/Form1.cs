@@ -43,7 +43,6 @@ namespace AnalizadorLexico
                 {
                     e.Graphics.DrawString(Convert.ToString(i + 1), textoCodigo.Font, myBrush, pictureBox1.Width - (e.Graphics.MeasureString(Convert.ToString(i + 1), textoCodigo.Font).Width + 10), ALTURA);
                     CARACTER = CARACTER + textoCodigo.Lines[i].Length + 1;
-                    //MessageBox.Show(Convert.ToString(textoCodigo.Lines.Length));
                     ALTURA = textoCodigo.GetPositionFromCharIndex(CARACTER).Y;
                 }
             }
@@ -157,7 +156,6 @@ namespace AnalizadorLexico
 
         private void AnalizeCode()
         {
-            //dtgToken.clear;
             dtgToken.Rows.Clear();
             int n = 0, e = 0;
 
@@ -169,11 +167,8 @@ namespace AnalizadorLexico
                     if (palabrasReservadas.Contains(tk.Lexema))
                         tk.Name = "RESERVADO DEL SISTEMA";
                 dtgToken.Rows.Add(tk.Name, tk.Lexema, tk.Linea, tk.Columna, tk.Index);
-                //lvToken.Items.Add(tk.ToString());
                 n++;
             }
-
-            //this.title = string.Format("Analizador Lexico - {0} tokens {1} errores", n, e);
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -319,24 +314,12 @@ namespace AnalizadorLexico
                     //+ " *TermErrorAlias: " + item.Term.ErrorAlias
                     //+ " *itemtermName: " + item.Term.Name);
 
-
                     if (item.Term.Name.Equals("Declaracion"))
                     {
                         String tipodedato = null, variable = null, valor = null;
                         menor = item.Span.EndPosition - item.Span.Length;
                         mayor = item.Span.EndPosition;
                         int totalDeclaradas = 0, priTLD = 3;
-
-                        //    MessageBox.Show("#" + con.ToString()
-                        //+ " *ITEM: " + item.ToString()
-                        //+ " *associativity: " + item.Associativity.ToString()
-                        //+ " *Span End position: " + item.Span.EndPosition
-                        //+ " *Span Length: " + item.Span.Length
-                        //+ " *Span : Location" + item.Span.Location
-                        //+ " *Term: " + item.Term.ToString()
-                        //+ " *TermErrorAlias: " + item.Term.ErrorAlias
-                        //+ " *item.Term.Name: " + item.Term.Name);
-                        //
                         #region Agregado de variables declaradas
                         foreach (var item1 in nodos)
                         {
@@ -354,12 +337,10 @@ namespace AnalizadorLexico
                                 if (item1.Term.Name.Equals("tipodedato"))
                                 {
                                     tipodedato = item1.ToString().Split(' ').ElementAt(0);
-                                    //MessageBox.Show(tipodedato);
                                 }
                                 if (item1.Term.Name.Equals("id"))
                                 {
                                     variable = item1.ToString().Split(' ').ElementAt(0);
-                                    //MessageBox.Show(variable);
                                 }
                                 if (item1.Term.Name.Equals("numero")
                                     || item1.Term.Name.Equals("numero-decimal")
@@ -370,7 +351,6 @@ namespace AnalizadorLexico
                                     if (item1.Term.Name.Equals("tipodedato"))
                                     {
                                         valor = null;
-                                        //MessageBox.Show(item1.ToString() + "muski");
                                     }
                                     else if (item1.Term.Name.Equals("cualquier"))
                                     {
@@ -379,7 +359,6 @@ namespace AnalizadorLexico
                                     else
                                     {
                                         valor = item1.ToString().Split(' ').ElementAt(0);
-                                        //MessageBox.Show(item1.ToString() + "muski");
                                     }
                                 }
                                 if (item1.Term.Name.Equals("<>in") && tipodedato.Equals("entero"))
@@ -421,7 +400,7 @@ namespace AnalizadorLexico
                                 }
                                 totalDeclaradas++;
 
-                                if(totalDeclaradas == priTLD)
+                                if (totalDeclaradas == priTLD)
                                 {
                                     #region Detecta si ya hay una variable declarada
                                     Boolean declarada = false;
@@ -453,20 +432,11 @@ namespace AnalizadorLexico
                                     totalDeclaradas = 0;
                                     #endregion
                                 }
-                                //    MessageBox.Show("#" + con.ToString()
-                                //+ " *ITEM: " + item1.ToString()
-                                //+ " *associativity: " + item1.Associativity.ToString()
-                                //+ " *Span End position: " + item1.Span.EndPosition
-                                //+ " *Span Length: " + item1.Span.Length
-                                //+ " *Span : Location" + item1.Span.Location
-                                //+ " *Term: " + item1.Term.ToString()
-                                //+ " *TermErrorAlias: " + item1.Term.ErrorAlias
-                                //+ " *itemtermName: " + item1.Term.Name);
                             }
                         }
                         #endregion
                         //
-                        if(totalDeclaradas == 2)
+                        if (totalDeclaradas == 2)
                         {
                             #region Detecta si ya hay una variable declarada
                             Boolean declarada = false;
@@ -501,7 +471,6 @@ namespace AnalizadorLexico
                     //No se ha declarado
                     if (item.ToString().Contains("(id)"))
                     {
-                        //MessageBox.Show(item.ToString());
                         String var = item.ToString().Split(' ').ElementAt(0);
                         Boolean encontrada = false;
                         foreach (var item1 in ts)
@@ -531,7 +500,6 @@ namespace AnalizadorLexico
 
                     con++;
                 }
-                //
                 #region Error semantico no se pueden declarar variables que son palabras reservadas
                 foreach (var item in nodos)
                 {
@@ -552,7 +520,6 @@ namespace AnalizadorLexico
 
                 foreach (var item in ts)
                 {
-                    //MessageBox.Show(item.tipo + " "+item.tipoDato+" "+item.variable+" "+item.valor);
                     dtgSemantico.Rows.Add(item.tipo, item.tipoDato, item.variable, item.valor);
                 }
 
@@ -567,15 +534,6 @@ namespace AnalizadorLexico
                     int vueltas = 0;
                     foreach (var item in nodos)
                     {
-                        //MessageBox.Show("#" + con.ToString()
-                        //                + " *ITEM: " + item.ToString()
-                        //                + " *associativity: " + item.Associativity.ToString()
-                        //                + " *Span End position: " + item.Span.EndPosition
-                        //                + " *Span Length: " + item.Span.Length
-                        //                + " *Span : Location" + item.Span.Location
-                        //                + " *Term: " + item.Term.ToString()
-                        //                + " *TermErrorAlias: " + item.Term.ErrorAlias
-                        //                + " *itemtermName: " + item.Term.Name);
                         con++;
 
                         if (item.Term.Name.Equals("asignacion"))
@@ -583,7 +541,6 @@ namespace AnalizadorLexico
                             int primerif = 0;
                             menor = item.Span.EndPosition - item.Span.Length;
                             mayor = item.Span.EndPosition;
-                            //MessageBox.Show(menor+" "+ mayor);
                             String tipoVariableAsignacion = null, tipoOtrasId = null, otrasId = null;
                             foreach (var itemTodo in nodos)
                             {
@@ -615,7 +572,7 @@ namespace AnalizadorLexico
                                                         if (!tipoVariableAsignacion.Equals(tipoOtrasId))
                                                         {
                                                             tbConsola.Text += "Error en las asignaciones los tipo de dato no pueden ser distintos";
-                                                            MessageBox.Show("Error de compilación", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                            MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                                             return;
                                                         }
                                                     }
@@ -647,10 +604,8 @@ namespace AnalizadorLexico
                                     cadenaOperacion = cadenaOperacion.Replace(car, car2);
                                 }
                             }
-                            //MessageBox.Show(cadenaOperacion);
                             ParseTreeNode resultadoOpe = Sintactico.operaciones(cadenaOperacion);
                             recorridoope = RecorridoOperacion.resolverOperacion(resultadoOpe);
-                            //MessageBox.Show(recorridoope);
                             foreach (DataGridViewRow itemTablaSimbolos in dtgSemantico.Rows)
                             {
                                 if (variableasignacion.Equals(itemTablaSimbolos.Cells["Variable"].Value)
@@ -680,7 +635,6 @@ namespace AnalizadorLexico
                                     if (item1.Term.Name.Equals("="))
                                     {
                                         entro = true;
-                                        //menor = item1.Span.EndPosition - item1.Span.Length;
                                     }
                                     if (item1.Term.Name.Equals("cualquier") && entro == true)
                                     {
@@ -739,7 +693,6 @@ namespace AnalizadorLexico
 
                             menor = item.Span.EndPosition - item.Span.Length;
                             mayor = item.Span.EndPosition;
-                            //MessageBox.Show(menor+" "+ mayor);
                             foreach (var item1 in nodos)
                             {
                                 if ((item1.Term.Name.Equals("id"))
@@ -825,20 +778,12 @@ namespace AnalizadorLexico
                                 if ((item1.Span.EndPosition <= mayor
                                 && (item1.Span.EndPosition - item1.Span.Length) >= menor))
                                 {
-                                    MessageBox.Show("#" + con.ToString()
-                                                    + " *ITEM: " + item1.ToString()
-                                                    + " *associativity: " + item1.Associativity.ToString()
-                                                    + " *Span End position: " + item1.Span.EndPosition
-                                                    + " *Span Length: " + item1.Span.Length
-                                                    + " *Span : Location" + item1.Span.Location
-                                                    + " *Term: " + item1.Term.ToString()
-                                                    + " *TermErrorAlias: " + item1.Term.ErrorAlias
-                                                    + " *itemtermName: " + item1.Term.Name);
+                                    //Si quiero hacer el if, aquí está la magia
+                                    nodos.Remove(item1);
                                 }
                             }
                         }
                     }
-                    //String a = Interaction.InputBox("Ingrese valor","Input","",-1,-1);
                     tbConsola.Text += ("Compilación correcta") + Environment.NewLine;
                 }
                 else MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -909,7 +854,7 @@ namespace AnalizadorLexico
 
         private void btnInfo_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("ADAMANT $\nCreado por: André Ibarra Pérez", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("ADAMANT $\nCreado por: André Ibarra Pérez y Osiel Alejandro Treto Cedillo", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         int posX = 0;
         int posY = 0;
