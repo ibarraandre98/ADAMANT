@@ -40,6 +40,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.semantico = new System.Windows.Forms.TabPage();
+            this.dtgSemantico = new System.Windows.Forms.DataGridView();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoDeDato = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Variable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sintactico = new System.Windows.Forms.TabPage();
             this.dtgToken = new System.Windows.Forms.DataGridView();
             this.Token = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,12 +53,6 @@
             this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Columna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Indice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.semantico = new System.Windows.Forms.TabPage();
-            this.dtgSemantico = new System.Windows.Forms.DataGridView();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoDeDato = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Variable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabLexico = new System.Windows.Forms.TabPage();
@@ -89,10 +89,10 @@
             this.btnRest = new System.Windows.Forms.Button();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
-            this.sintactico.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgToken)).BeginInit();
             this.semantico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgSemantico)).BeginInit();
+            this.sintactico.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgToken)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabLexico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -115,6 +115,106 @@
             this.tabControl1.Size = new System.Drawing.Size(353, 601);
             this.tabControl1.TabIndex = 0;
             // 
+            // semantico
+            // 
+            this.semantico.Controls.Add(this.dtgSemantico);
+            this.semantico.Location = new System.Drawing.Point(4, 22);
+            this.semantico.Name = "semantico";
+            this.semantico.Padding = new System.Windows.Forms.Padding(3);
+            this.semantico.Size = new System.Drawing.Size(345, 575);
+            this.semantico.TabIndex = 1;
+            this.semantico.Text = "Semántico";
+            this.semantico.UseVisualStyleBackColor = true;
+            // 
+            // dtgSemantico
+            // 
+            this.dtgSemantico.AllowUserToAddRows = false;
+            this.dtgSemantico.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Calibri", 12F);
+            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.White;
+            this.dtgSemantico.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            this.dtgSemantico.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dtgSemantico.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dtgSemantico.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.dtgSemantico.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dtgSemantico.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.dtgSemantico.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(206)))), ((int)(((byte)(227)))));
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.GrayText;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgSemantico.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            this.dtgSemantico.ColumnHeadersHeight = 40;
+            this.dtgSemantico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dtgSemantico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Tipo,
+            this.TipoDeDato,
+            this.Variable,
+            this.Valor});
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Calibri", 12F);
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgSemantico.DefaultCellStyle = dataGridViewCellStyle21;
+            this.dtgSemantico.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtgSemantico.EnableHeadersVisualStyles = false;
+            this.dtgSemantico.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
+            this.dtgSemantico.Location = new System.Drawing.Point(3, 3);
+            this.dtgSemantico.MultiSelect = false;
+            this.dtgSemantico.Name = "dtgSemantico";
+            this.dtgSemantico.ReadOnly = true;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Calibri", 12F);
+            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgSemantico.RowHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            this.dtgSemantico.RowHeadersVisible = false;
+            this.dtgSemantico.RowHeadersWidth = 50;
+            this.dtgSemantico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgSemantico.Size = new System.Drawing.Size(339, 569);
+            this.dtgSemantico.TabIndex = 1;
+            // 
+            // Tipo
+            // 
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            this.Tipo.Width = 63;
+            // 
+            // TipoDeDato
+            // 
+            this.TipoDeDato.HeaderText = "Tipo de Dato";
+            this.TipoDeDato.Name = "TipoDeDato";
+            this.TipoDeDato.ReadOnly = true;
+            this.TipoDeDato.Width = 121;
+            // 
+            // Variable
+            // 
+            this.Variable.HeaderText = "Variable";
+            this.Variable.Name = "Variable";
+            this.Variable.ReadOnly = true;
+            this.Variable.Width = 88;
+            // 
+            // Valor
+            // 
+            this.Valor.HeaderText = "Valor";
+            this.Valor.Name = "Valor";
+            this.Valor.ReadOnly = true;
+            this.Valor.Width = 68;
+            // 
             // sintactico
             // 
             this.sintactico.Controls.Add(this.dtgToken);
@@ -132,26 +232,26 @@
             this.dtgToken.AllowUserToDeleteRows = false;
             this.dtgToken.AllowUserToOrderColumns = true;
             this.dtgToken.AllowUserToResizeRows = false;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Calibri", 12F);
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.White;
-            this.dtgToken.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Calibri", 12F);
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.White;
+            this.dtgToken.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle23;
             this.dtgToken.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtgToken.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.dtgToken.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dtgToken.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.dtgToken.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(118)))), ((int)(((byte)(202)))), ((int)(((byte)(246)))));
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.GrayText;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgToken.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(118)))), ((int)(((byte)(202)))), ((int)(((byte)(246)))));
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.GrayText;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgToken.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.dtgToken.ColumnHeadersHeight = 40;
             this.dtgToken.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dtgToken.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -160,35 +260,35 @@
             this.Linea,
             this.Columna,
             this.Indice});
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Calibri", 12F);
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgToken.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Calibri", 12F);
+            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgToken.DefaultCellStyle = dataGridViewCellStyle25;
             this.dtgToken.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtgToken.EnableHeadersVisualStyles = false;
             this.dtgToken.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
             this.dtgToken.Location = new System.Drawing.Point(3, 3);
             this.dtgToken.Name = "dtgToken";
             this.dtgToken.ReadOnly = true;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Calibri", 12F);
-            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgToken.RowHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Calibri", 12F);
+            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgToken.RowHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.dtgToken.RowHeadersVisible = false;
             this.dtgToken.RowHeadersWidth = 50;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.White;
-            this.dtgToken.RowsDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.White;
+            this.dtgToken.RowsDefaultCellStyle = dataGridViewCellStyle27;
             this.dtgToken.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgToken.Size = new System.Drawing.Size(339, 569);
             this.dtgToken.TabIndex = 0;
@@ -227,106 +327,6 @@
             this.Indice.Name = "Indice";
             this.Indice.ReadOnly = true;
             this.Indice.Width = 74;
-            // 
-            // semantico
-            // 
-            this.semantico.Controls.Add(this.dtgSemantico);
-            this.semantico.Location = new System.Drawing.Point(4, 22);
-            this.semantico.Name = "semantico";
-            this.semantico.Padding = new System.Windows.Forms.Padding(3);
-            this.semantico.Size = new System.Drawing.Size(345, 575);
-            this.semantico.TabIndex = 1;
-            this.semantico.Text = "Semántico";
-            this.semantico.UseVisualStyleBackColor = true;
-            // 
-            // dtgSemantico
-            // 
-            this.dtgSemantico.AllowUserToAddRows = false;
-            this.dtgSemantico.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Calibri", 12F);
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.White;
-            this.dtgSemantico.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle24;
-            this.dtgSemantico.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dtgSemantico.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dtgSemantico.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.dtgSemantico.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dtgSemantico.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dtgSemantico.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(206)))), ((int)(((byte)(227)))));
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.GrayText;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgSemantico.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
-            this.dtgSemantico.ColumnHeadersHeight = 40;
-            this.dtgSemantico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dtgSemantico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Tipo,
-            this.TipoDeDato,
-            this.Variable,
-            this.Valor});
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Calibri", 12F);
-            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgSemantico.DefaultCellStyle = dataGridViewCellStyle26;
-            this.dtgSemantico.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtgSemantico.EnableHeadersVisualStyles = false;
-            this.dtgSemantico.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(240)))), ((int)(((byte)(245)))));
-            this.dtgSemantico.Location = new System.Drawing.Point(3, 3);
-            this.dtgSemantico.MultiSelect = false;
-            this.dtgSemantico.Name = "dtgSemantico";
-            this.dtgSemantico.ReadOnly = true;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Calibri", 12F);
-            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgSemantico.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
-            this.dtgSemantico.RowHeadersVisible = false;
-            this.dtgSemantico.RowHeadersWidth = 50;
-            this.dtgSemantico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgSemantico.Size = new System.Drawing.Size(339, 569);
-            this.dtgSemantico.TabIndex = 1;
-            // 
-            // Tipo
-            // 
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.ReadOnly = true;
-            this.Tipo.Width = 63;
-            // 
-            // TipoDeDato
-            // 
-            this.TipoDeDato.HeaderText = "Tipo de Dato";
-            this.TipoDeDato.Name = "TipoDeDato";
-            this.TipoDeDato.ReadOnly = true;
-            this.TipoDeDato.Width = 121;
-            // 
-            // Variable
-            // 
-            this.Variable.HeaderText = "Variable";
-            this.Variable.Name = "Variable";
-            this.Variable.ReadOnly = true;
-            this.Variable.Width = 88;
-            // 
-            // Valor
-            // 
-            this.Valor.HeaderText = "Valor";
-            this.Valor.Name = "Valor";
-            this.Valor.ReadOnly = true;
-            this.Valor.Width = 68;
             // 
             // Timer1
             // 
@@ -383,11 +383,13 @@
             // 
             // tbConsola
             // 
+            this.tbConsola.BackColor = System.Drawing.Color.Gray;
             this.tbConsola.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tbConsola.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbConsola.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(236)))), ((int)(((byte)(243)))));
             this.tbConsola.Location = new System.Drawing.Point(3, 449);
             this.tbConsola.Name = "tbConsola";
+            this.tbConsola.ReadOnly = true;
             this.tbConsola.Size = new System.Drawing.Size(913, 123);
             this.tbConsola.TabIndex = 3;
             this.tbConsola.Text = "";
@@ -795,10 +797,10 @@
             this.Text = "Adamant";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
-            this.sintactico.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgToken)).EndInit();
             this.semantico.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgSemantico)).EndInit();
+            this.sintactico.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dtgToken)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabLexico.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
