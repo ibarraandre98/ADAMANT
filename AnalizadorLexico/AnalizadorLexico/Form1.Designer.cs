@@ -519,7 +519,7 @@
             // button7
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button7.BackgroundImage = global::AnalizadorLexico.Properties.Resources._81521304_imagen_de_la_historieta_del_icono_de_diamante_símbolo_de_diamante1;
+            this.button7.BackgroundImage = global::Adamant.Properties.Resources._81521304_imagen_de_la_historieta_del_icono_de_diamante_símbolo_de_diamante1;
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -534,7 +534,7 @@
             // 
             // button6
             // 
-            this.button6.BackgroundImage = global::AnalizadorLexico.Properties.Resources.correr;
+            this.button6.BackgroundImage = global::Adamant.Properties.Resources.correr;
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -549,7 +549,7 @@
             // 
             // btnRun
             // 
-            this.btnRun.BackgroundImage = global::AnalizadorLexico.Properties.Resources.nuevo;
+            this.btnRun.BackgroundImage = global::Adamant.Properties.Resources.nuevo;
             this.btnRun.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRun.FlatAppearance.BorderSize = 0;
             this.btnRun.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -564,7 +564,7 @@
             // 
             // button5
             // 
-            this.button5.BackgroundImage = global::AnalizadorLexico.Properties.Resources.borrar;
+            this.button5.BackgroundImage = global::Adamant.Properties.Resources.borrar;
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -579,7 +579,7 @@
             // 
             // bOpen
             // 
-            this.bOpen.BackgroundImage = global::AnalizadorLexico.Properties.Resources.abrir;
+            this.bOpen.BackgroundImage = global::Adamant.Properties.Resources.abrir;
             this.bOpen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bOpen.FlatAppearance.BorderSize = 0;
             this.bOpen.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -594,7 +594,7 @@
             // 
             // button4
             // 
-            this.button4.BackgroundImage = global::AnalizadorLexico.Properties.Resources.pegar;
+            this.button4.BackgroundImage = global::Adamant.Properties.Resources.pegar;
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -609,7 +609,7 @@
             // 
             // button1
             // 
-            this.button1.BackgroundImage = global::AnalizadorLexico.Properties.Resources.guardar;
+            this.button1.BackgroundImage = global::Adamant.Properties.Resources.guardar;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -624,7 +624,7 @@
             // 
             // button3
             // 
-            this.button3.BackgroundImage = global::AnalizadorLexico.Properties.Resources.cortar;
+            this.button3.BackgroundImage = global::Adamant.Properties.Resources.cortar;
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -639,7 +639,7 @@
             // 
             // button2
             // 
-            this.button2.BackgroundImage = global::AnalizadorLexico.Properties.Resources.copiar;
+            this.button2.BackgroundImage = global::Adamant.Properties.Resources.copiar;
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
@@ -675,7 +675,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.BackgroundImage = global::AnalizadorLexico.Properties.Resources.Minecraft_Shaded_Iron_Ore_Wallpaper_By_Chrisl21_Apps_Directories;
+            this.panel2.BackgroundImage = global::Adamant.Properties.Resources.Minecraft_Shaded_Iron_Ore_Wallpaper_By_Chrisl21_Apps_Directories;
             this.panel2.Controls.Add(this.btnCer);
             this.panel2.Controls.Add(this.btnMax);
             this.panel2.Controls.Add(this.btnMin);
@@ -772,7 +772,7 @@
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox4.Image = global::AnalizadorLexico.Properties.Resources.adamantUltimo1;
+            this.pictureBox4.Image = global::Adamant.Properties.Resources.adamantUltimo1;
             this.pictureBox4.Location = new System.Drawing.Point(43, 0);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(136, 35);

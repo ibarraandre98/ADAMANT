@@ -43,7 +43,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::AnalizadorLexico.Properties.Resources._81521304_imagen_de_la_historieta_del_icono_de_diamante_símbolo_de_diamante;
+            this.pictureBox1.Image = global::Adamant.Properties.Resources._81521304_imagen_de_la_historieta_del_icono_de_diamante_símbolo_de_diamante;
             this.pictureBox1.Location = new System.Drawing.Point(331, 47);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(275, 224);
@@ -79,7 +79,7 @@
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox4.Image = global::AnalizadorLexico.Properties.Resources.adamantUltimo;
+            this.pictureBox4.Image = global::Adamant.Properties.Resources.adamantUltimo;
             this.pictureBox4.Location = new System.Drawing.Point(299, 253);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(339, 113);
@@ -110,7 +110,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.BackgroundImage = global::AnalizadorLexico.Properties.Resources.images__3___2_;
+            this.BackgroundImage = global::Adamant.Properties.Resources.images__3___2_;
             this.ClientSize = new System.Drawing.Size(935, 488);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
