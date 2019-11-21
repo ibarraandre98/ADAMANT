@@ -369,6 +369,7 @@ namespace AnalizadorLexico
                                     valor = Interaction.InputBox("Leer por teclado", "Ingrese el valor de \"" + variable + "\" que es de tipo " + tipodedato, "0");
                                     if (!int.TryParse(valor, out ejem))
                                     {
+                                        tbConsola.SelectionColor = Color.Red;
                                         tbConsola.Text += "Error la variable es de tipo entero, no puede asignar un valor distinto a este";
                                         MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
@@ -380,6 +381,7 @@ namespace AnalizadorLexico
                                     valor = Interaction.InputBox("Leer por teclado", "Ingrese el valor de \"" + variable + "\" que es de tipo " + tipodedato, "0");
                                     if (!double.TryParse(valor, out ejem))
                                     {
+                                        tbConsola.SelectionColor = Color.Red;
                                         tbConsola.Text += "Error la variable es de tipo doble, no puede asignar un valor distinto a este";
                                         MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
@@ -391,6 +393,7 @@ namespace AnalizadorLexico
                                     valor = Interaction.InputBox("Leer por teclado", "Ingrese el valor de \"" + variable + "\" que es de tipo " + tipodedato, "0");
                                     if (!float.TryParse(valor, out ejem))
                                     {
+                                        tbConsola.SelectionColor = Color.Red;
                                         tbConsola.Text += "Error la variable es de tipo flotante, no puede asignar un valor distinto a este";
                                         MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
@@ -497,6 +500,7 @@ namespace AnalizadorLexico
                         else
                         {
                             resultado = false;
+                            tbConsola.SelectionColor = Color.Red;
                             tbConsola.Text += ("No se ha declarado la variable: " + var + " en la linea: " + item.Span.Location) + Environment.NewLine;
                         }
 
@@ -513,6 +517,7 @@ namespace AnalizadorLexico
                         {
                             if (var[0].Equals(item1.variable) && item1.tipo.Equals("Reservada"))
                             {
+                                tbConsola.SelectionColor = Color.Red;
                                 tbConsola.Text += ("Error no puede utilizar \"" + var[0] + "\" es una palabra reservada en la linea: " + item.Span.Location) + Environment.NewLine;
                                 resultado = false;
                             }
@@ -560,7 +565,9 @@ namespace AnalizadorLexico
                                         || itemTodo.Term.Name.Equals("*")
                                         || itemTodo.Term.Name.Equals("/")
                                         || itemTodo.Term.Name.Equals("^")
-                                        || itemTodo.Term.Name.Equals("√"))
+                                        || itemTodo.Term.Name.Equals("√")
+                                        || itemTodo.Term.Name.Equals("(")
+                                        || itemTodo.Term.Name.Equals(")"))
                                     {
                                         if (primerif != 0)
                                         {
@@ -599,6 +606,7 @@ namespace AnalizadorLexico
                                 }
                             }
                             String car, car2;
+                            //MessageBox.Show(cadenaOperacion);
                             foreach (DataGridViewRow itemOpe in dtgSemantico.Rows)
                             {
                                 car = Convert.ToString(itemOpe.Cells["Variable"].Value);
@@ -660,6 +668,7 @@ namespace AnalizadorLexico
                                                && !valorId.Cells["TipoDeDato"].Value.Equals("cadena")))
                                             {
                                                 resultado = false;
+                                                tbConsola.SelectionColor = Color.Red;
                                                 tbConsola.Text = "Error no se puede concatenar un entero con una cadena";
                                                 MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                                 return;
@@ -790,8 +799,11 @@ namespace AnalizadorLexico
                     }
                     tbConsola.Text += ("Compilación correcta") + Environment.NewLine;
                 }
-                else MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                else
+                {
+                    tbConsola.SelectionColor = Color.Red;
+                    MessageBox.Show("Error de compilación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 ts.Clear();
                 LlenadoTablaSimbolos();
 #endregion
